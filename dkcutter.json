@@ -1,0 +1,27 @@
+{
+  "$schema": "https://dkcutter.ncontiero.com/schema.json",
+  "projectName": {
+    "value": "My Awesome Project",
+    "promptMessage": "What is the project name?"
+  },
+  "projectSlug": {
+    "value": "{{ projectName|lower|replace(' ', '-')|trim }}",
+    "promptMessage": "What is the project slug?",
+    "validateRegex": {
+      "regex": "^[a-z0-9@][a-z0-9-_]*$",
+      "message": "Invalid project slug. Please enter a valid value."
+    }
+  },
+  "description": {
+    "value": "Behold My Awesome Project!",
+    "promptMessage": "What is the project description?"
+  },
+  "authorName": {
+    "value": "Nicolas Contiero <https://github.com/ncontiero>",
+    "promptMessage": "What is the author name?"
+  },
+  "projectVersion": {
+    "value": "0.1.0",
+    "promptMessage": "What is the project version?"
+  }
+}
