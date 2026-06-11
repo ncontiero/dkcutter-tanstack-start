@@ -92,7 +92,8 @@ async function main() {
   }
 
   const removeClerk = () => {
-    REMOVE_DEPS.push("@clerk/clerk-react");
+    REMOVE_DEPS.push("@clerk/tanstack-react-start");
+    FILES_TO_REMOVE.push(srcFolder, "start.ts");
   };
   const removeBetterAuth = () => {
     REMOVE_DEPS.push("@better-auth/prisma-adapter", "better-auth");

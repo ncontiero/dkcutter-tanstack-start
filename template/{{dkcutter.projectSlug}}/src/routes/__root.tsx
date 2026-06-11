@@ -14,8 +14,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 {%- endif %}
 {%- if dkcutter.authProvider == "clerk" %}
-import { ClerkProvider } from "@clerk/clerk-react";
-import { env } from "@/env";
+import { ClerkProvider } from "@clerk/tanstack-react-start";
 {%- endif %}
 
 interface MyRouterContext {% if dkcutter.useTanstackQuery %}{
@@ -58,25 +57,12 @@ function RootDocument({ children }: { children: ReactNode }) {
       </head>
       <body>
 {%- if dkcutter.authProvider == "clerk" %}
-        <ClerkProvider publishableKey={env.VITE_CLERK_PUBLISHABLE_KEY} afterSignOutUrl="/">
+        <ClerkProvider>
           {children}
-          <TanStackDevtools
-            plugins={[
-              {
-                name: "Tanstack Router",
-                render: <TanStackRouterDevtoolsPanel />,
-              },
-{%- if dkcutter.useTanstackQuery %}
-              {
-                name: "Tanstack Query",
-                render: <ReactQueryDevtoolsPanel />,
-              },
-{%- endif %}
-            ]}
-          />
         </ClerkProvider>
 {%- else %}
         {children}
+{%- endif %}
         <TanStackDevtools
           plugins={[
             {
@@ -91,7 +77,6 @@ function RootDocument({ children }: { children: ReactNode }) {
 {%- endif %}
           ]}
         />
-{%- endif %}
         <Scripts />
       </body>
     </html>
