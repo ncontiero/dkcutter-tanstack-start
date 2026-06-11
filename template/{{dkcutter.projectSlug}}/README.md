@@ -1,12 +1,12 @@
-Welcome to your new TanStack Start app!
+Welcome to {{ dkcutter.projectName }}!
 
 # Getting Started
 
 To run this application:
 
 ```bash
-bun install
-bun --bun run dev
+{{ dkcutter.pkgManager }} install
+{{ dkcutter.pkgManager }} run dev
 ```
 
 # Building For Production
@@ -14,133 +14,7 @@ bun --bun run dev
 To build this application for production:
 
 ```bash
-bun --bun run build
-```
-
-## Testing
-
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
-
-```bash
-bun --bun run test
-```
-
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `bun install @tailwindcss/vite tailwindcss -D`
-
-## Deploy with Nitro
-
-This project uses Nitro as a generic server adapter, so it can run on any Node-compatible host.
-
-```bash
-npm run build
-node dist/server/index.mjs
-```
-
-The build output is a self-contained Node server. To deploy, push the `dist/` directory to your host (Render, Fly.io, your own VPS, etc.) and run the server command above.
-
-For host-specific presets (Vercel, Netlify, Cloudflare, AWS Lambda, etc.) and tuning, see https://v3.nitro.build/deploy.
-
-## Setting up Clerk
-
-1. Sign up at [clerk.com](https://clerk.com) and create an application
-2. Copy the **Publishable Key** from the Clerk dashboard
-3. Set it in your `.env.local`:
-   ```bash
-   VITE_CLERK_PUBLISHABLE_KEY=pk_test_...
-   ```
-4. Visit the demo route at `/demo/clerk` once `npm run dev` is running
-
-### What's wired up
-
-- **`<ClerkProvider>`** at the app root (`src/integrations/clerk/provider.tsx`) handles auth context for the whole tree
-- **`<SignInButton>` / `<UserButton>`** in the header swap based on auth state
-- **`/demo/clerk`** shows Clerk's prebuilt sign-in UI and a signed-in greeting
-
-### Protecting a route
-
-Wrap any component in `<SignedIn>` / `<SignedOut>`:
-
-```tsx
-import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
-
-function ProtectedPage() {
-  return (
-    <>
-      <SignedIn>
-        <YourPageContent />
-      </SignedIn>
-      <SignedOut>
-        <RedirectToSignIn />
-      </SignedOut>
-    </>
-  );
-}
-```
-
-For server-side checks (route loaders, server functions), see the Clerk docs on [`auth()`](https://clerk.com/docs/references/backend/auth).
-
-### Production checklist
-
-- Replace the test keys with **production keys** from a dedicated production Clerk instance
-- Configure your production domain under **Domains** in the Clerk dashboard
-- Set up social providers (Google, GitHub, etc.) under **User & Authentication → Social Connections**
-
-## T3Env
-
-- You can use T3Env to add type safety to your environment variables.
-- Add Environment variables to the `src/env.mjs` file.
-- Use the environment variables in your code.
-
-### Usage
-
-```ts
-import { env } from "#/env";
-
-console.log(env.VITE_APP_TITLE);
-```
-
-## Setting up Better Auth
-
-1. Generate and set the `BETTER_AUTH_SECRET` environment variable in your `.env.local`:
-
-   ```bash
-   bunx --bun @better-auth/cli secret
-   ```
-
-2. Visit the [Better Auth documentation](https://www.better-auth.com) to unlock the full potential of authentication in your app.
-
-### Adding a Database (Optional)
-
-Better Auth can work in stateless mode, but to persist user data, add a database:
-
-```typescript
-// src/lib/auth.ts
-import { betterAuth } from "better-auth";
-import { Pool } from "pg";
-
-export const auth = betterAuth({
-  database: new Pool({
-    connectionString: process.env.DATABASE_URL,
-  }),
-  // ... rest of config
-});
-```
-
-Then run migrations:
-
-```bash
-bunx --bun @better-auth/cli migrate
+{{ dkcutter.pkgManager }} run build
 ```
 
 ## Routing
@@ -221,7 +95,7 @@ import { createServerFn } from "@tanstack/react-start";
 
 const getServerTime = createServerFn({
   method: "GET",
-}).handler(async () => {
+}).handler(() => {
   return new Date().toISOString();
 });
 
@@ -284,10 +158,6 @@ function PeopleComponent() {
 ```
 
 Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
 
 # Learn More
 

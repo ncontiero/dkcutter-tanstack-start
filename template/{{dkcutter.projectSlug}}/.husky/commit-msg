@@ -1,0 +1,1 @@
+{{ dkcutter.pkgManager }} run commitlint ${1}

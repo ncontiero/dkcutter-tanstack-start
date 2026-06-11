@@ -23,5 +23,85 @@
   "projectVersion": {
     "value": "0.1.0",
     "promptMessage": "What is the project version?"
-  }
+  },
+  "authProvider": {
+    "value": "none",
+    "choices": [
+      { "title": "None", "value": "none" },
+      {
+        "title": "Clerk",
+        "value": "clerk",
+        "description": "Hosted user accounts with prebuilt sign-in UI and social providers (managed)."
+      },
+      {
+        "title": "Better Auth",
+        "value": "betterAuth",
+        "description": "Self-hosted user accounts and sessions (open source, full control)."
+      }
+    ],
+    "promptMessage": "What {{ colors.blue('Authentication Provider') }} would you like to use?"
+  },
+  "additionalTools": {
+    "value": "none",
+    "choices": [
+      {
+        "title": "Husky",
+        "value": "husky",
+        "description": "Modern native git hooks made easy." 
+      },
+      {
+        "title": "Lint Staged",
+        "value": "lintStaged",
+        "description": "Run linters against staged git files and don't let 💩 slip into your code base!"
+      },
+      {
+        "title": "Nano Staged",
+        "value": "nanoStaged",
+        "description": "Tiny tool to run commands for modified, staged, and committed files in a GIT repository."
+      },
+      {
+        "title": "Commitlint",
+        "value": "commitlint",
+        "description": "Lint commit messages."
+      },
+      {
+        "title": "ESlint + Type Information",
+        "value": "eslintTypeInfo",
+        "description": "Enable ESLint rules that require type information."
+      },
+      {
+        "title": "Prisma",
+        "value": "prisma",
+        "description": "Next-generation ORM for Node.js & TypeScript."
+      },
+      {
+        "title": "Trigger.dev",
+        "value": "triggerDev",
+        "description": "The open source background jobs platform."
+      },
+      {
+        "title": "Tanstack Query",
+        "value": "tanstackQuery",
+        "description": "Powerful asynchronous state management for TS/JS."
+      },
+      {
+        "title": "Unpic",
+        "value": "unpic",
+        "description": "High-performance, framework-agnostic image component."
+      }
+    ],
+    "choicesType": "multiselect",
+    "promptMessage": "What {{ colors.blue('Additional Tools') }} would you like to use?"
+  },
+  "automatedDepsUpdater": {
+    "value": "none",
+    "choices": [
+      { "title": "None", "value": "none" },
+      { "title": "Mend Renovate", "value": "renovate" },
+      { "title": "Github Dependabot", "value": "dependabot" }
+    ],
+    "promptMessage": "What {{ colors.blue('Automated Dependency Updater')}} do you want to use?"
+  },
+  "_pkgManager": "{{ dkcutter.pkgManager }}",
+  "_ciInstall": "{{ _pkgManager }} {{ 'ci' if _pkgManager == 'npm' else 'install' }}{{ ' --frozen-lockfile' if _pkgManager in ['yarn', 'pnpm', 'bun'] }}"
 }

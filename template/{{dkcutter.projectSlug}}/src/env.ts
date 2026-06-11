@@ -2,8 +2,25 @@ import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
 export const env = createEnv({
+  /**
+   * Specify your server-side environment variables schema here. This way you can ensure the app
+   * isn't built with invalid env vars.
+   */
   server: {
-    SERVER_URL: z.string().url().optional(),
+    NODE_ENV: z
+      .enum(["development", "test", "production"])
+      .default("development"),
+{%- if dkcutter.usePrisma %}
+    DATABASE_URL: z.url(),
+{%- endif %}
+{%- if dkcutter.authProvider == "clerk" %}
+    // Clerk
+    CLERK_SECRET_KEY: z.string().min(1),
+{%- elif dkcutter.authProvider == "betterAuth" %}
+    // Better Auth
+    BETTER_AUTH_SECRET: z.string().min(1),
+    BETTER_AUTH_URL: z.url(),
+{%- endif %}
   },
 
   /**
@@ -12,8 +29,17 @@ export const env = createEnv({
    */
   clientPrefix: "VITE_",
 
+  /**
+   * Specify your client-side environment variables schema here. This way you can ensure the app
+   * isn't built with invalid env vars. To expose them to the client, prefix them with
+   * `VITE_`.
+   */
   client: {
-    VITE_APP_TITLE: z.string().min(1).optional(),
+    // VITE_CLIENTVAR: z.string(),
+{%- if dkcutter.authProvider == "clerk" %}
+    // Clerk
+    VITE_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+{%- endif %}
   },
 
   /**

@@ -1,0 +1,27 @@
+export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
+export type AuthProvider = "none" | "clerk" | "betterAuth";
+export type AutomatedDepsUpdater = "none" | "renovate" | "dependabot";
+
+export interface ContextProps {
+  projectSlug: string;
+  pkgManager: PackageManager;
+  authProvider: AuthProvider;
+  useHusky: boolean;
+  useLintStaged: boolean;
+  useNanoStaged: boolean;
+  useCommitlint: boolean;
+  useEslintWithType: boolean;
+  usePrisma: boolean;
+  useTriggerDev: boolean;
+  useTanstackQuery: boolean;
+  useUnpic: boolean;
+  automatedDepsUpdater: AutomatedDepsUpdater;
+}
+
+export interface SetFlagProps {
+  filePath: string;
+  flag: string;
+  length?: number;
+  value?: string;
+  formatted?: string;
+}

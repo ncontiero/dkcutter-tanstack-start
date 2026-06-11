@@ -1,0 +1,34 @@
+# Config for Dependabot updates. See Documentation here:
+# https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference
+
+version: 2
+updates:
+  # Update GitHub actions in workflows
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+
+  # Update npm packages
+  - package-ecosystem: npm
+    directory: /
+    groups:
+      definitely-typed:
+        patterns:
+          - "@types*"
+        update-types:
+          - minor
+          - patch
+      {%- if dkcutter.usePrisma %}
+      prisma:
+        patterns:
+          - "@prisma*"
+          - prisma
+      {%- endif %}
+      {%- if dkcutter.useCommitlint %}
+      commitlint:
+        patterns:
+          - "@commitlint*"
+      {%- endif %}
+    schedule:
+      interval: daily

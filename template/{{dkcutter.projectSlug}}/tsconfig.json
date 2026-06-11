@@ -1,25 +1,32 @@
 {
   "compilerOptions": {
+    // Compilation and Target Settings
     "target": "ES2022",
     "jsx": "react-jsx",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
 
-    /* Bundler mode */
+    // Library Definitions
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    
+    // Module Resolution and Detection
+    "module": "ESNext",
     "moduleResolution": "bundler",
+
+    // Path Aliases
     "paths": {
       "@/*": ["./src/*"]
     },
+    
+    // JavaScript and Strictness
     "types": ["vite/client"],
     "allowImportingTsExtensions": true,
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+
+    // Output and Interoperability
     "noEmit": true,
     "verbatimModuleSyntax": true,
-
-    /* Linting */
     "skipLibCheck": true,
     "noUncheckedSideEffectImports": true
   },

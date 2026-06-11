@@ -1,0 +1,1 @@
+{{ dkcutter.pkgManager }} run pre-commit

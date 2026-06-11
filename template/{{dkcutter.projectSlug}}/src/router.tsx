@@ -1,20 +1,35 @@
+{% if dkcutter.useTanstackQuery -%}
+import { QueryClient } from "@tanstack/react-query";
+{% endif -%}
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
+{%- if dkcutter.useTanstackQuery %}
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
-import { getContext } from "./integrations/tanstack-query/root-provider";
+{%- endif %}
 import { routeTree } from "./routeTree.gen";
 
 export function getRouter() {
-  const context = getContext();
+  {% if dkcutter.useTanstackQuery -%}
+  const queryClient = new QueryClient();
+
+  {% endif -%}
 
   const router = createTanStackRouter({
     routeTree,
-    context,
+    context: {
+      // Define the context for the router
+{%- if dkcutter.useTanstackQuery %}
+      queryClient,
+{%- endif %}
+    },
     scrollRestoration: true,
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
   });
 
+  {% if dkcutter.useTanstackQuery -%}
   setupRouterSsrQueryIntegration({ router, queryClient: context.queryClient });
+
+  {% endif -%}
 
   return router;
 }
