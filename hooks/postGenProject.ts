@@ -12,7 +12,7 @@ import { getPkgManagerVersion } from "./utils/getPkgManagerVersion";
 import { setFlag } from "./utils/setFlag";
 import { updatePackageJson } from "./utils/updatePackageJson";
 
-const TEMPLATE_REPO = "ncontiero/dkcutter-tanstack-start";
+// const TEMPLATE_REPO = "ncontiero/dkcutter-tanstack-start";
 const CTX: ContextProps = {
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
