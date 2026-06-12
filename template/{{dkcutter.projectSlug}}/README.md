@@ -1,15 +1,22 @@
-Welcome to {{ dkcutter.projectName }}!
+# {{ dkcutter.projectName }}
 
-# Getting Started
+{{ dkcutter.description }}
 
-To run this application:
+[![license mit](https://img.shields.io/badge/licence-MIT-7c3aed)](/LICENSE)
+[![Built with dkcutter-tanstack-start](https://img.shields.io/badge/built%20with-DKCutter%20TanStack%20Start-7c3aed.svg)](https://github.com/ncontiero/dkcutter-tanstack-start)
+
+## 🚀 Getting Started
+
+To run this application locally:
 
 ```bash
 {{ dkcutter.pkgManager }} install
 {{ dkcutter.pkgManager }} run dev
 ```
 
-# Building For Production
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🏗️ Building For Production
 
 To build this application for production:
 
@@ -17,7 +24,7 @@ To build this application for production:
 {{ dkcutter.pkgManager }} run build
 ```
 
-## Routing
+## 🗺️ Routing
 
 This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
 
@@ -45,7 +52,7 @@ Then anywhere in your JSX you can use it like so:
 
 This will create a link that will navigate to the `/about` route.
 
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
+More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/latest/docs/framework/react/api/router/linkComponent).
 
 ### Using A Layout
 
@@ -86,7 +93,7 @@ export const Route = createRootRoute({
 
 More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
 
-## Server Functions
+## ⚡ Server Functions
 
 TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
 
@@ -111,7 +118,7 @@ function MyComponent() {
 }
 ```
 
-## API Routes
+## 📡 API Routes
 
 You can create API routes by using the `server` property in your route definitions:
 
@@ -128,7 +135,7 @@ export const Route = createFileRoute("/api/hello")({
 });
 ```
 
-## Data Fetching
+## 🔄 Data Fetching
 
 There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
 
@@ -159,7 +166,7 @@ function PeopleComponent() {
 
 Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
 
-# Learn More
+## 📚 Learn More
 
 You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
 
