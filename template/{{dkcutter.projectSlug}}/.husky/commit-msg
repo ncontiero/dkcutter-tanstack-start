@@ -1,1 +1,1 @@
-{{ dkcutter.pkgManager }} run commitlint ${1}
+{{ dkcutter.pkgManager }} run commit-msg ${1}

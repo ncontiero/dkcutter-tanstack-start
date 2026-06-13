@@ -176,7 +176,7 @@ async function main() {
   }
 
   if (CTX.useCommitlint) {
-    SCRIPTS.commitlint = "commitlint --edit";
+    SCRIPTS["commit-msg"] = "commitlint --edit";
   } else {
     REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
     FILES_TO_REMOVE.push(
