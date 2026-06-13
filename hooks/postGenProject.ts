@@ -52,7 +52,7 @@ async function main() {
 
   const REMOVE_DEPS: string[] = [];
   const REMOVE_DEV_DEPS: string[] = [];
-  let SCRIPTS = packageJson.scripts || {};
+  const SCRIPTS = packageJson.scripts || {};
   const FILES_TO_REMOVE: string[] = [];
 
   await setFlagsInEnvs();
@@ -112,37 +112,52 @@ async function main() {
     removeClerk();
   }
 
-  if (CTX.useTriggerDev) {
-    const newDevScript = `concurrently --kill-others --names "tanstack,trigger" --prefix-colors "red,green" "${SCRIPTS.dev}" "${CTX.pkgManager} run trigger:dev"`;
-    SCRIPTS.dev = newDevScript;
-    SCRIPTS = {
-      ...SCRIPTS,
-      "trigger:dev": "trigger dev",
-      "trigger:deploy": "trigger deploy",
-    };
-  } else {
-    REMOVE_DEPS.push("@trigger.dev/sdk");
-    REMOVE_DEV_DEPS.push("@trigger.dev/build", "trigger.dev", "concurrently");
-    FILES_TO_REMOVE.push(
-      path.join(projectDir, "trigger.config.ts"),
-      path.join(srcFolder, "trigger"),
+  if (!CTX.useHusky && !CTX.useLintStaged && !CTX.useNanoStaged) {
+    REMOVE_DEV_DEPS.push("husky");
+    FILES_TO_REMOVE.push(path.join(projectDir, ".husky"));
+    delete SCRIPTS.prepare;
+  } else if (CTX.useLintStaged || CTX.useNanoStaged) {
+    logger.warn(
+      "Husky is required for lint-staged or nano-staged. It will be installed.",
     );
   }
 
-  if (CTX.usePrisma) {
-    const prismaScriptsToAdd = {
-      "db:generate": "dotenv -e .env.local -- prisma generate",
-      "db:push": "dotenv -e .env.local -- prisma db push",
-      "db:migrate": "dotenv -e .env.local -- prisma migrate dev",
-      "db:studio": "dotenv -e .env.local -- prisma studio",
-      "db:seed": "dotenv -e .env.local -- prisma db seed",
-      postinstall: `${
-        SCRIPTS.postinstall ? `${SCRIPTS.postinstall} && ` : ""
-      }${CTX.pkgManager} run db:generate`,
-    };
+  const removeLintStaged = () => {
+    REMOVE_DEV_DEPS.push("lint-staged");
+  };
+  if (!CTX.useLintStaged) {
+    removeLintStaged();
+    await updatePackageJson({ projectDir, keys: ["lint-staged"] });
+  }
 
-    delete SCRIPTS.postinstall;
-    Object.assign(SCRIPTS, prismaScriptsToAdd);
+  if (!CTX.useNanoStaged) {
+    REMOVE_DEV_DEPS.push("nano-staged");
+  }
+
+  if (CTX.useLintStaged && CTX.useNanoStaged) {
+    removeLintStaged();
+    logger.warn(
+      "You have selected both lint-staged and nano-staged. nano-staged will be used for the pre-commit script.",
+    );
+  }
+  if (!CTX.useLintStaged && !CTX.useNanoStaged) {
+    delete SCRIPTS["pre-commit"];
+    FILES_TO_REMOVE.push(path.join(projectDir, ".husky", "pre-commit"));
+  }
+
+  if (!CTX.useCommitlint) {
+    REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
+    FILES_TO_REMOVE.push(
+      path.join(projectDir, ".commitlintrc.json"),
+      path.join(projectDir, ".husky", "commit-msg"),
+    );
+    delete SCRIPTS["commit-msg"];
+  }
+
+  if (CTX.usePrisma) {
+    const dbGenerate = `${CTX.pkgManager} run db:generate`;
+    SCRIPTS.build = `${dbGenerate} && ${SCRIPTS.build}`;
+    SCRIPTS.postinstall = `${SCRIPTS.postinstall} && ${dbGenerate}`;
   } else {
     REMOVE_DEPS.push(
       "@better-auth/prisma-adapter",
@@ -155,41 +170,25 @@ async function main() {
       path.join(projectDir, "prisma.config.ts"),
       path.join(libFolder, "prisma.ts"),
     );
+    delete SCRIPTS["db:generate"];
+    delete SCRIPTS["db:push"];
+    delete SCRIPTS["db:migrate"];
+    delete SCRIPTS["db:studio"];
+    delete SCRIPTS["db:seed"];
   }
 
-  if (CTX.useLintStaged) {
-    SCRIPTS["pre-commit"] = "lint-staged";
+  if (CTX.useTriggerDev) {
+    const newDevScript = `concurrently --kill-others --names "tanstack,trigger" --prefix-colors "red,green" "${SCRIPTS.dev}" "${CTX.pkgManager} run trigger:dev"`;
+    SCRIPTS.dev = newDevScript;
   } else {
-    REMOVE_DEV_DEPS.push("lint-staged");
-  }
-
-  if (CTX.useNanoStaged) {
-    SCRIPTS["pre-commit"] = "nano-staged";
-    if (CTX.useLintStaged) {
-      logger.warn(
-        "You have selected both lint-staged and nano-staged. nano-staged will be used for the pre-commit script.",
-      );
-    }
-  } else {
-    REMOVE_DEV_DEPS.push("nano-staged");
-    await updatePackageJson({ projectDir, keys: ["nano-staged"] });
-  }
-
-  if (CTX.useCommitlint) {
-    SCRIPTS["commit-msg"] = "commitlint --edit";
-  } else {
-    REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
+    REMOVE_DEPS.push("@trigger.dev/sdk");
+    REMOVE_DEV_DEPS.push("@trigger.dev/build", "trigger.dev", "concurrently");
     FILES_TO_REMOVE.push(
-      path.join(projectDir, ".commitlintrc.json"),
-      path.join(projectDir, ".husky", "commit-msg"),
+      path.join(projectDir, "trigger.config.ts"),
+      path.join(srcFolder, "trigger"),
     );
-  }
-
-  if (CTX.useHusky) {
-    SCRIPTS.prepare = "husky";
-  } else {
-    REMOVE_DEV_DEPS.push("husky");
-    FILES_TO_REMOVE.push(path.join(projectDir, ".husky"));
+    delete SCRIPTS["trigger:dev"];
+    delete SCRIPTS["trigger:deploy"];
   }
 
   if (!CTX.useTanstackQuery) {
@@ -226,12 +225,6 @@ async function main() {
   } else {
     removeDependabot();
     removeRenovate();
-  }
-
-  if (SCRIPTS?.postinstall) {
-    const postinstall = SCRIPTS.postinstall;
-    delete SCRIPTS.postinstall;
-    SCRIPTS = { ...SCRIPTS, postinstall };
   }
 
   await updatePackageJson({

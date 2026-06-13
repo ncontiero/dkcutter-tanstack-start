@@ -12,10 +12,20 @@
     "generate-routes": "tsr generate",
     "build": "{{ 'bun --bun ' if dkcutter.pkgManager == 'bun' }}vite build",
     "preview": "{{ 'bun --bun ' if dkcutter.pkgManager == 'bun' }}vite preview",
+    "trigger:dev": "trigger dev",
+    "trigger:deploy": "trigger deploy",
+    "db:generate": "dotenv -e .env.local -- prisma generate",
+    "db:push": "dotenv -e .env.local -- prisma db push",
+    "db:migrate": "dotenv -e .env.local -- prisma migrate dev",
+    "db:studio": "dotenv -e .env.local -- prisma studio",
+    "db:seed": "dotenv -e .env.local -- prisma db seed",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "{{ dkcutter.pkgManager }} run lint {{ '-- ' if dkcutter.pkgManager == 'npm' }}--fix",
     "typecheck": "tsc --noEmit",
     "check": "{{ dkcutter.pkgManager }} run lint && {{ dkcutter.pkgManager }} run typecheck",
+    "pre-commit": "{{ 'nano-staged' if dkcutter.useNanoStaged else 'lint-staged' }}",
+    "commit-msg": "commitlint --edit",
+    "prepare": "husky",
     "postinstall": "{{ dkcutter.pkgManager }} run generate-routes"
   },
   "dependencies": {
@@ -68,7 +78,7 @@
   "engines": {
     "node": ">=24"
   },
-  "{{ 'lint-staged' if dkcutter.useLintStaged else 'nano-staged' }}": {
+  "{{ 'nano-staged' if dkcutter.useNanoStaged else 'lint-staged' }}": {
     "*": "{{ dkcutter.pkgManager }} run lint:fix"
   }
 }

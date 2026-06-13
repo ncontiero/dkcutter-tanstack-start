@@ -47,17 +47,17 @@
       {
         "title": "Husky",
         "value": "husky",
-        "description": "Modern native git hooks made easy." 
+        "description": "Modern native git hooks made easy. (Necessary for Lint Staged and Nano Staged)"
       },
       {
         "title": "Lint Staged",
         "value": "lintStaged",
-        "description": "Run linters against staged git files and don't let 💩 slip into your code base!"
+        "description": "Run linters against staged git files and don't let 💩 slip into your code base! (Requires Husky)"
       },
       {
         "title": "Nano Staged",
         "value": "nanoStaged",
-        "description": "Tiny tool to run commands for modified, staged, and committed files in a GIT repository."
+        "description": "Tiny tool to run commands for modified, staged, and committed files in a GIT repository. (Requires Husky)"
       },
       {
         "title": "Commitlint",
