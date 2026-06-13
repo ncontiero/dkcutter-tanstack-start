@@ -10,10 +10,10 @@ const createPrismaClient = () =>
     adapter,
   });
 
-declare global {
-  let __prisma: ReturnType<typeof createPrismaClient> | undefined;
-}
+const globalForPrisma = globalThis as unknown as {
+  prisma: ReturnType<typeof createPrismaClient> | undefined;
+};
 
-export const prisma = globalThis.__prisma ?? createPrismaClient();
+export const prisma = globalForPrisma.prisma ?? createPrismaClient();
 
-if (env.NODE_ENV !== "production") globalThis.__prisma = prisma;
+if (env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;

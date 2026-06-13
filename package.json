@@ -12,6 +12,9 @@
     "lint:fix": "bun run lint --fix",
     "typecheck": "bun --bun tsc --noEmit",
     "check": "bun run lint && bun run typecheck",
+    "test": "vitest run",
+    "test:typecheck": "RUN_TYPE_CHECK=true bun run test",
+    "test:strict-eslint": "GET_WARNINGS=true bun run test",
     "pre-commit": "lint-staged -c ./package.json",
     "prepare": "husky"
   },
@@ -19,12 +22,14 @@
     "@commitlint/cli": "21.0.2",
     "@commitlint/config-conventional": "21.0.2",
     "@ncontiero/eslint-config": "8.2.2",
+    "@tanstack/eslint-plugin-query": "5.101.0",
     "@types/bun": "1.3.14",
     "dkcutter": "6.0.2",
     "eslint": "10.4.1",
     "husky": "9.1.7",
     "lint-staged": "17.0.7",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vitest": "4.1.8"
   },
   "lint-staged": {
     "*": "bun run lint:fix"

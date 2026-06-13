@@ -93,7 +93,7 @@ async function main() {
 
   const removeClerk = () => {
     REMOVE_DEPS.push("@clerk/tanstack-react-start");
-    FILES_TO_REMOVE.push(srcFolder, "start.ts");
+    FILES_TO_REMOVE.push(path.join(srcFolder, "start.ts"));
   };
   const removeBetterAuth = () => {
     REMOVE_DEPS.push("@better-auth/prisma-adapter", "better-auth");
@@ -153,7 +153,7 @@ async function main() {
     FILES_TO_REMOVE.push(
       path.join(projectDir, "prisma"),
       path.join(projectDir, "prisma.config.ts"),
-      path.join(libFolder, "prisma"),
+      path.join(libFolder, "prisma.ts"),
     );
   }
 

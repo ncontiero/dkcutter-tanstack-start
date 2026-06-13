@@ -1,21 +1,21 @@
 import appCss from "@/styles.css?url";
-import type { ReactNode } from "react";
 {% if dkcutter.useTanstackQuery -%}
 import type { QueryClient } from "@tanstack/react-query";
 {% endif -%}
+import type { ReactNode } from "react";
+{%- if dkcutter.authProvider == "clerk" %}
+import { ClerkProvider } from "@clerk/tanstack-react-start";
+{%- endif %}
 import { TanStackDevtools } from "@tanstack/react-devtools";
+{%- if dkcutter.useTanstackQuery %}
+import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
+{%- endif %}
 import {
   createRootRouteWithContext,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-{%- if dkcutter.useTanstackQuery %}
-import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
-{%- endif %}
-{%- if dkcutter.authProvider == "clerk" %}
-import { ClerkProvider } from "@clerk/tanstack-react-start";
-{%- endif %}
 
 interface MyRouterContext {% if dkcutter.useTanstackQuery %}{
   queryClient: QueryClient;
@@ -57,9 +57,7 @@ function RootDocument({ children }: { children: ReactNode }) {
       </head>
       <body>
 {%- if dkcutter.authProvider == "clerk" %}
-        <ClerkProvider>
-          {children}
-        </ClerkProvider>
+        <ClerkProvider>{children}</ClerkProvider>
 {%- else %}
         {children}
 {%- endif %}

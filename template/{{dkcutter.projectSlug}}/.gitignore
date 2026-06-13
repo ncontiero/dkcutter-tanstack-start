@@ -136,3 +136,18 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Tanstack
+.tanstack
+
+{%- if dkcutter.usePrisma %}
+
+# Prisma
+src/lib/generated
+{%- endif %}
+
+{%- if dkcutter.useTriggerDev %}
+
+# Trigger.dev
+.trigger
+{%- endif %}

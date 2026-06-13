@@ -27,7 +27,7 @@ export function getRouter() {
   });
 
   {% if dkcutter.useTanstackQuery -%}
-  setupRouterSsrQueryIntegration({ router, queryClient: context.queryClient });
+  setupRouterSsrQueryIntegration({ router, queryClient });
 
   {% endif -%}
 

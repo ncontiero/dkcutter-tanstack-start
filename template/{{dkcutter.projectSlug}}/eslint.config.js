@@ -13,4 +13,25 @@ export default ncontiero({
 {%- if dkcutter.useTanstackQuery %}
   tanstackQuery: true,
 {%- endif %}
+  react: {
+    overrides: {
+      "react-refresh/only-export-components": [
+        "warn",
+        {
+          allowConstantExport: true,
+          // Necessary for TanStack Start / Router
+          // https://github.com/ArnaudBarre/eslint-plugin-react-refresh/issues/102
+          extraHOCs: [
+            "createFileRoute",
+            "createLazyFileRoute",
+            "createRootRoute",
+            "createRootRouteWithContext",
+            "createLink",
+            "createRoute",
+            "createLazyRoute",
+          ],
+        },
+      ],
+    },
+  },
 });

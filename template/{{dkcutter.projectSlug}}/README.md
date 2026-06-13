@@ -107,11 +107,11 @@ const getServerTime = createServerFn({
 });
 
 // Use in a component
-function MyComponent() {
+export function MyComponent() {
   const [time, setTime] = useState("");
 
   useEffect(() => {
-    getServerTime().then(setTime);
+    getServerTime().then(setTime).catch(console.error);
   }, []);
 
   return <div>Server time: {time}</div>;
