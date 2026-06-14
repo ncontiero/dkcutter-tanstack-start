@@ -5,7 +5,7 @@
   "private": true,
   "packageManager": "",
   "description": "{{dkcutter.description}}",
-  "author": "{{dkcutter.authorName}}",
+  "author": "{{dkcutter.authorName|safe}}",
   "license": "MIT",
   "scripts": {
     "dev": "{{ 'bun --bun ' if dkcutter.useBunRuntime }}vite dev --port 3000",
