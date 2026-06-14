@@ -32,3 +32,12 @@ This page describes all the template options that will be prompted by the [DKCut
   - None
   - [Mend Renovate](https://docs.renovatebot.com/)
   - [Github Dependabot](https://docs.github.com/code-security/dependabot/working-with-dependabot/dependabot-options-reference)
+
+- **Deployment Host**: Indicates the hosting provider the application will be configured for:
+  - None
+  - [Cloudflare](https://workers.cloudflare.com/): Deploy to Cloudflare Workers (edge runtime, KV/D1/R2 bindings).
+  - [Netlify](https://www.netlify.com/): Deploy to Netlify (Functions and Edge Functions).
+  - [Nitro (agnostic)](https://nitro.build): Generic Nitro adapter (deploy to any Node-compatible host).
+  - [Vercel](https://vercel.com/): Deploy to Vercel (Serverless Functions and Edge Middleware).
+
+- **Use Bun Runtime**: Indicates whether the project should use [Bun](https://bun.sh/) as the server runtime (only prompted if Bun is the chosen package manager).

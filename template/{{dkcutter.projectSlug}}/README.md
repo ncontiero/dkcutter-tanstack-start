@@ -166,6 +166,61 @@ function PeopleComponent() {
 
 Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
 
+{%- if dkcutter.deployHost == "cloudflare" %}
+
+## 🚀 Deploy to Cloudflare Workers
+
+This project uses the Cloudflare Vite plugin (configured in `vite.config.ts`) and `wrangler.jsonc`:
+
+1. Install Wrangler: `{{ dkcutter.pkgManager }} install -g wrangler`
+2. Authenticate: `wrangler login`
+3. Deploy: `wrangler deploy`
+
+For production env vars, run `wrangler secret put MY_VAR` for each secret listed in `.env`. Public (non-secret) vars go in `wrangler.jsonc` under `vars`.
+
+KV, D1, R2, and Durable Object bindings are configured in `wrangler.jsonc` — see <https://developers.cloudflare.com/workers/wrangler/configuration/>.
+{%- elif dkcutter.deployHost == "netlify" %}
+
+## 🚀 Deploy to Netlify
+
+This project ships with `netlify.toml` configured for a Netlify site:
+
+1. Push this repo to GitHub
+2. Visit <https://app.netlify.com/start> and import the repo
+3. Netlify auto-detects the build (`vite build` → `dist/client`)
+4. Open **Site settings → Environment variables** and add anything from `.env` that needs a real value in production
+5. Trigger the first deploy
+
+Server functions and API routes run on Netlify Functions. For lower-latency request handling, see Netlify Edge Functions: <https://docs.netlify.com/edge-functions/overview>.
+{%- elif dkcutter.deployHost == "nitro" %}
+
+## 🚀 Deploy with Nitro
+
+This project uses Nitro as a generic server adapter, so it can run on any Node-compatible host.
+
+```bash
+{{ dkcutter.pkgManager }} run build
+{{ 'bun run' if dkcutter.useBunRuntime else 'node' }} output/server/index.mjs
+```
+
+The build output is a self-contained Node server. To deploy, push the `output/` directory to your host (Render, Fly.io, your own VPS, etc.) and run the server command above.
+
+For host-specific presets (Vercel, Netlify, Cloudflare, AWS Lambda, etc.) and tuning, see <https://nitro.build/deploy>.
+{%- elif dkcutter.deployHost == "vercel" %}
+
+## 🚀 Deploy to Vercel
+
+This project is configured to deploy to Vercel out-of-the-box:
+
+1. Push this repository to GitHub, GitLab, or Bitbucket.
+2. Visit <https://vercel.com/new> and import your repository.
+3. Vercel will automatically detect the framework and configure the build settings (`{{ dkcutter.pkgManager }} run build`).
+4. Add any required environment variables from your `.env` to the project settings on Vercel.
+5. Deploy!
+
+Server functions and API routes will automatically be deployed as Vercel Serverless Functions.
+{%- endif %}
+
 ## 📚 Learn More
 
 You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).

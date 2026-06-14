@@ -17,6 +17,7 @@ Powered by [DKCutter](https://dkcutter.ncontiero.com/), DKCutter TanStack Start 
 - 🖼️ **Images**: High-performance, framework-agnostic image component via [Unpic](https://unpic.pics/).
 - 🛠️ **Code Quality & Git Hooks**: Enforce standards with Husky, Lint Staged, Nano Staged, Commitlint, and optional type-aware ESLint.
 - 🤖 **Dependency Automation**: Keep your project up-to-date automatically using Mend Renovate or GitHub Dependabot.
+- 🚀 **Deployment & Runtime**: Pre-configured options for Cloudflare, Netlify, Vercel, or generic Nitro deployment, alongside optional Bun runtime support.
 
 ## Usage
 
@@ -58,9 +59,11 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the project description? … Behold My Awesome Project!
 ✔ What is the author name? … Nicolas Contiero <https://github.com/ncontiero>
 ✔ What is the project version? … 0.1.0
-✔ What Authentication Provider would you like to use? › None / Clerk / Better Auth
-✔ What Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Unpic
-✔ What Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
+✔ Which Authentication Provider would you like to use? › None / Clerk / Better Auth
+✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Unpic
+✔ Which Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
+✔ Which Deployment Host would you like to use? › None / Cloudflare / Netlify / Nitro (agnostic) / Vercel
+✔ Bun detected. Use it as the Server Runtime for My Awesome Project? … No / Yes
 
 Next steps:
   cd my-awesome-project
@@ -95,6 +98,8 @@ If you want to bypass the interactive prompts and start faster, you can provide 
 | `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                     |
 | `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `eslintTypeInfo`, `prisma`, `triggerDev`, `tanstackQuery`, `unpic`). |
 | `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                |
+| `--deployHost <string>`           | Select the Deployment Host (`none`, `cloudflare`, `netlify`, `nitro`, `vercel`).                                                                       |
+| `--useBunRuntime [boolean]`       | Use Bun as the Server Runtime (only when using `bun` as package manager).                                                                              |
 
 [See here for more information about options][options-url].
 
