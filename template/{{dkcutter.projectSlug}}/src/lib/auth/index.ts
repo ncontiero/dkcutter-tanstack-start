@@ -10,6 +10,11 @@ import { prisma } from "../prisma";
 export const auth = betterAuth({
 {%- if dkcutter.usePrisma %}
   database: prismaAdapter(prisma, { provider: "postgresql" }),
+  advanced: {
+    database: {
+      generateId: false,
+    },
+  },
 {%- endif %}
   session: {
     cookieCache: {
