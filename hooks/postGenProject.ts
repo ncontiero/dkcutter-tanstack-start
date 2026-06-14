@@ -2,6 +2,7 @@ import type {
   AuthProvider,
   AutomatedDepsUpdater,
   ContextProps,
+  DeployHost,
   PackageManager,
 } from "./utils/types";
 import path from "node:path";
@@ -28,6 +29,9 @@ const CTX: ContextProps = {
   useUnpic: toBoolean("{{ dkcutter.useUnpic }}"),
   automatedDepsUpdater:
     "{{ dkcutter.automatedDepsUpdater }}" as AutomatedDepsUpdater,
+  deployHost: "{{ dkcutter.deployHost }}" as DeployHost,
+  // useNitro = deployHost in ["nitro", "vercel"]
+  useNitro: toBoolean("{{ dkcutter.useNitro }}"),
 };
 
 async function setBetterAuthSecretKey(filePath: string) {
@@ -225,6 +229,40 @@ async function main() {
   } else {
     removeDependabot();
     removeRenovate();
+  }
+
+  const removeCloudflare = () => {
+    REMOVE_DEV_DEPS.push("@cloudflare/vite-plugin", "wrangler");
+    FILES_TO_REMOVE.push(path.join(projectDir, "wrangler.jsonc"));
+    delete SCRIPTS.deploy;
+    delete SCRIPTS["cf-typegen"];
+  };
+  const removeNetlify = () => {
+    REMOVE_DEV_DEPS.push("@netlify/vite-plugin-tanstack-start");
+    FILES_TO_REMOVE.push(path.join(projectDir, "netlify.toml"));
+  };
+  const removeNitro = () => {
+    REMOVE_DEPS.push("nitro");
+    delete SCRIPTS.start;
+  };
+
+  if (CTX.deployHost === "cloudflare") {
+    SCRIPTS.postinstall = `${SCRIPTS.postinstall} && ${CTX.pkgManager} run cf-typegen`;
+    removeNetlify();
+    removeNitro();
+  } else if (CTX.deployHost === "netlify") {
+    removeCloudflare();
+    removeNitro();
+  } else if (CTX.useNitro) {
+    removeCloudflare();
+    removeNetlify();
+    if (CTX.deployHost === "vercel") {
+      delete SCRIPTS.start;
+    }
+  } else {
+    removeCloudflare();
+    removeNetlify();
+    removeNitro();
   }
 
   await updatePackageJson({

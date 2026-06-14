@@ -39,7 +39,7 @@
         "description": "Self-hosted user accounts and sessions (open source, full control)."
       }
     ],
-    "promptMessage": "What {{ colors.blue('Authentication Provider') }} would you like to use?"
+    "promptMessage": "Which {{ colors.blue('Authentication Provider') }} would you like to use?"
   },
   "additionalTools": {
     "value": "none",
@@ -91,7 +91,7 @@
       }
     ],
     "choicesType": "multiselect",
-    "promptMessage": "What {{ colors.blue('Additional Tools') }} would you like to use?"
+    "promptMessage": "Which {{ colors.blue('Additional Tools') }} would you like to use?"
   },
   "automatedDepsUpdater": {
     "value": "none",
@@ -100,7 +100,40 @@
       { "title": "Mend Renovate", "value": "renovate" },
       { "title": "Github Dependabot", "value": "dependabot" }
     ],
-    "promptMessage": "What {{ colors.blue('Automated Dependency Updater')}} do you want to use?"
+    "promptMessage": "Which {{ colors.blue('Automated Dependency Updater')}} do you want to use?"
+  },
+  "deployHost": {
+    "value": "none",
+    "choices": [
+      { "title": "None", "value": "none" },
+      {
+        "title": "Cloudflare",
+        "value": "cloudflare",
+        "description": "Deploy to Cloudflare Workers (edge runtime, KV/D1/R2 bindings)."
+      },
+      {
+        "title": "Netlify",
+        "value": "netlify",
+        "description": "Deploy to Netlify (Functions and Edge Functions, GitHub-driven)."
+      },
+      {
+        "title": "Nitro (agnostic)",
+        "value": "nitro",
+        "description": "Generic Nitro adapter (deploy to any Node-compatible host).",
+        "selected": "true"
+      },
+      {
+        "title": "Vercel",
+        "value": "vercel",
+        "description": "Deploy to Vercel (Serverless Functions and Edge Middleware, GitHub-driven)."
+      }
+    ],
+    "promptMessage": "Which {{ colors.blue('Deployment Host') }} would you like to use?"
+  },
+  "useBunRuntime": {
+    "value": false,
+    "disabled": "{{ dkcutter.pkgManager != 'bun' }}",
+    "promptMessage": "{{ colors.cyan('Bun') }} detected. Use it as the {{ colors.yellow('Server Runtime') }} for {{ colors.blue(projectName) }}?"
   },
   "_pkgManager": "{{ dkcutter.pkgManager }}",
   "_ciInstall": "{{ _pkgManager }} {{ 'ci' if _pkgManager == 'npm' else 'install' }}{{ ' --frozen-lockfile' if _pkgManager in ['yarn', 'pnpm', 'bun'] }}"

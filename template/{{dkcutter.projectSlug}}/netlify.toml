@@ -1,0 +1,8 @@
+[build]
+command = "{{ dkcutter.pkgManager }} run build"
+publish = "dist/client"
+
+[dev]
+command = "{{ dkcutter.pkgManager }} run dev"
+targetPort = 3000
+port = 8888

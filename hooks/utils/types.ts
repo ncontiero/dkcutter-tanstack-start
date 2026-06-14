@@ -1,6 +1,7 @@
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
 export type AuthProvider = "none" | "clerk" | "betterAuth";
 export type AutomatedDepsUpdater = "none" | "renovate" | "dependabot";
+export type DeployHost = "none" | "cloudflare" | "netlify" | "nitro" | "vercel";
 
 export interface ContextProps {
   projectSlug: string;
@@ -16,6 +17,8 @@ export interface ContextProps {
   useTanstackQuery: boolean;
   useUnpic: boolean;
   automatedDepsUpdater: AutomatedDepsUpdater;
+  deployHost: DeployHost;
+  useNitro: boolean;
 }
 
 export interface SetFlagProps {

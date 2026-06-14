@@ -8,3 +8,6 @@
 // {{ dkcutter.add("useTriggerDev", "{{ 'triggerDev' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useTanstackQuery", "{{ 'tanstackQuery' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useUnpic", "{{ 'unpic' in dkcutter.additionalTools }}") }}
+
+// Vercel uses Nitro to deploy.
+// {{ dkcutter.add("useNitro", "{{ dkcutter.deployHost in ['nitro', 'vercel'] }}") }}
