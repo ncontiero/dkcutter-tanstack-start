@@ -16,6 +16,8 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { Header } from "@/components/header";
+import { ThemeProvider } from "@/components/theme-provider";
 
 interface MyRouterContext {% if dkcutter.useTanstackQuery %}{
   queryClient: QueryClient;
@@ -51,16 +53,22 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="flex flex-col">
+        <ThemeProvider>
 {%- if dkcutter.authProvider == "clerk" %}
-        <ClerkProvider>{children}</ClerkProvider>
+          <ClerkProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+          </ClerkProvider>
 {%- else %}
-        {children}
+          <Header />
+          <main className="flex-1">{children}</main>
 {%- endif %}
+        </ThemeProvider>
         <TanStackDevtools
           plugins={[
             {
