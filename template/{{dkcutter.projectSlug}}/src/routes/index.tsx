@@ -5,7 +5,7 @@ export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
   return (
-    <div className="flex flex-col items-center justify-center bg-background p-6 sm:p-12">
+    <div className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center bg-background px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-4xl space-y-12 text-center">
         {/* Hero Section */}
         <div className="space-y-6">
@@ -31,7 +31,7 @@ function Home() {
           </h1>
 
           <p className="mx-auto max-w-2xl text-lg/relaxed text-muted-foreground sm:text-xl">
-            {{ dkcutter.projectDescription }}
+            {{ dkcutter.description }}
           </p>
         </div>
 
