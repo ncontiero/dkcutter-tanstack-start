@@ -13,6 +13,14 @@ export default ncontiero({
 {%- if dkcutter.useTanstackQuery %}
   tanstackQuery: true,
 {%- endif %}
+  javascript: {
+    overrides: {
+      "node/no-unsupported-features/node-builtins": [
+        "error",
+        { allowExperimental: true },
+      ],
+    },
+  },
   react: {
     overrides: {
       "react-refresh/only-export-components": [
