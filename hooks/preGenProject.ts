@@ -7,6 +7,7 @@
 // {{ dkcutter.add("usePrisma", "{{ 'prisma' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useTriggerDev", "{{ 'triggerDev' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useTanstackQuery", "{{ 'tanstackQuery' in dkcutter.additionalTools }}") }}
+// {{ dkcutter.add("useTailwindTypography", "{{ 'tailwindTypography' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useUnpic", "{{ 'unpic' in dkcutter.additionalTools }}") }}
 
 // Vercel uses Nitro to deploy.

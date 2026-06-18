@@ -27,6 +27,7 @@ const CTX: ContextProps = {
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
   useTanstackQuery: toBoolean("{{ dkcutter.useTanstackQuery }}"),
   useUnpic: toBoolean("{{ dkcutter.useUnpic }}"),
+  useTailwindTypography: toBoolean("{{ dkcutter.useTailwindTypography }}"),
   automatedDepsUpdater:
     "{{ dkcutter.automatedDepsUpdater }}" as AutomatedDepsUpdater,
   deployHost: "{{ dkcutter.deployHost }}" as DeployHost,
@@ -204,6 +205,10 @@ async function main() {
       "@tanstack/eslint-plugin-query",
       "@tanstack/react-query-devtools",
     );
+  }
+
+  if (!CTX.useTailwindTypography) {
+    REMOVE_DEPS.push("@tailwindcss/typography");
   }
 
   if (!CTX.useUnpic) {
