@@ -1,8 +1,8 @@
 import appCss from "@/styles.css?url";
+import type { ReactNode } from "react";
 {% if dkcutter.useTanstackQuery -%}
 import type { QueryClient } from "@tanstack/react-query";
 {% endif -%}
-import type { ReactNode } from "react";
 {%- if dkcutter.authProvider == "clerk" %}
 import { ClerkProvider } from "@clerk/tanstack-react-start";
 {%- endif %}

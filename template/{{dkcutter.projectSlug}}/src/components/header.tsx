@@ -22,8 +22,7 @@ export function Header() {
             <Link
               to="/"
               className="
-                text-sm font-medium text-muted-foreground transition-colors hover:text-foreground
-                [&.active]:text-foreground
+                text-sm font-medium text-muted-foreground transition-colors hover:text-foreground [&.active]:text-foreground
               "
             >
               Home
@@ -36,9 +35,9 @@ export function Header() {
             type="button"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             className="
-              inline-flex size-9 items-center justify-center rounded-md border bg-background text-muted-foreground
-              shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2
-              focus-visible:ring-ring focus-visible:outline-none
+              inline-flex size-9 items-center justify-center rounded-md border bg-background text-muted-foreground shadow-sm
+              transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring
+              focus-visible:outline-none
             "
             aria-label="Toggle theme"
           >
