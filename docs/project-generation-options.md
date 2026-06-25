@@ -26,6 +26,8 @@ This page describes all the template options that will be prompted by the [DKCut
   - [Prisma](https://www.prisma.io/): Next-generation ORM for Node.js & TypeScript.
   - [Trigger.dev](https://trigger.dev/): The open source background jobs platform.
   - [Tanstack Query](https://tanstack.com/query/latest): Powerful asynchronous state management for TS/JS.
+  - [Shadcn](https://ui.shadcn.com/): Copy-paste accessible UI components (Tailwind + Radix primitives).
+  - [Tailwind CSS Typography](https://github.com/tailwindlabs/tailwindcss-typography): A plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML.
   - [Unpic](https://unpic.pics): High-performance, framework-agnostic image component.
 
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:

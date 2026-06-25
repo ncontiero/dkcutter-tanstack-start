@@ -15,6 +15,7 @@ Powered by [DKCutter](https://dkcutter.ncontiero.com/), DKCutter TanStack Start 
 - ⚙️ **Background Jobs**: Integrated with [Trigger.dev](https://trigger.dev/) for serverless background tasks.
 - 🔄 **Data Fetching**: Optional [TanStack Query](https://tanstack.com/query/latest) configuration for powerful async state management.
 - 🖼️ **Images**: High-performance, framework-agnostic image component via [Unpic](https://unpic.pics/).
+- 🎨 **Styling**: Pre-configured with **Tailwind CSS** out-of-the-box, with optional support for [Shadcn UI](https://ui.shadcn.com/) components and the [Tailwind CSS Typography](https://github.com/tailwindlabs/tailwindcss-typography) plugin.
 - 🛠️ **Code Quality & Git Hooks**: Enforce standards with Husky, Lint Staged, Nano Staged, Commitlint, and optional type-aware ESLint.
 - 🤖 **Dependency Automation**: Keep your project up-to-date automatically using Mend Renovate or GitHub Dependabot.
 - 🚀 **Deployment & Runtime**: Pre-configured options for Cloudflare, Netlify, Vercel, or generic Nitro deployment, alongside optional Bun runtime support.
@@ -60,7 +61,7 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the author name? … Nicolas Contiero <https://github.com/ncontiero>
 ✔ What is the project version? … 0.1.0
 ✔ Which Authentication Provider would you like to use? › None / Clerk / Better Auth
-✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Unpic
+✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Shadcn, Tailwind CSS Typography, Unpic
 ✔ Which Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
 ✔ Which Deployment Host would you like to use? › None / Cloudflare / Netlify / Nitro (agnostic) / Vercel
 ✔ Bun detected. Use it as the Server Runtime for My Awesome Project? … No / Yes
@@ -88,18 +89,18 @@ Now take a look at your repo. Don't forget to carefully look at the generated `R
 
 If you want to bypass the interactive prompts and start faster, you can provide configuration via CLI flags. All options in `dkcutter.json` are available as flags:
 
-| Flag                              | Description                                                                                                                                            |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--projectName <string>`          | The Project name.                                                                                                                                      |
-| `--projectSlug <string>`          | The Project Slug.                                                                                                                                      |
-| `--description <string>`          | The Project description.                                                                                                                               |
-| `--authorName <string>`           | The author name.                                                                                                                                       |
-| `--projectVersion <string>`       | The project version.                                                                                                                                   |
-| `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                     |
-| `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `eslintTypeInfo`, `prisma`, `triggerDev`, `tanstackQuery`, `unpic`). |
-| `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                |
-| `--deployHost <string>`           | Select the Deployment Host (`none`, `cloudflare`, `netlify`, `nitro`, `vercel`).                                                                       |
-| `--useBunRuntime [boolean]`       | Use Bun as the Server Runtime (only when using `bun` as package manager).                                                                              |
+| Flag                              | Description                                                                                                                                                                            |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--projectName <string>`          | The Project name.                                                                                                                                                                      |
+| `--projectSlug <string>`          | The Project Slug.                                                                                                                                                                      |
+| `--description <string>`          | The Project description.                                                                                                                                                               |
+| `--authorName <string>`           | The author name.                                                                                                                                                                       |
+| `--projectVersion <string>`       | The project version.                                                                                                                                                                   |
+| `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                                                     |
+| `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `eslintTypeInfo`, `prisma`, `triggerDev`, `tanstackQuery`, `shadcn`, `tailwindTypography`, `unpic`). |
+| `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                                                |
+| `--deployHost <string>`           | Select the Deployment Host (`none`, `cloudflare`, `netlify`, `nitro`, `vercel`).                                                                                                       |
+| `--useBunRuntime [boolean]`       | Use Bun as the Server Runtime (only when using `bun` as package manager).                                                                                                              |
 
 [See here for more information about options][options-url].
 

@@ -5,6 +5,33 @@
 [![license mit](https://img.shields.io/badge/licence-MIT-7c3aed)](/LICENSE)
 [![Built with dkcutter-tanstack-start](https://img.shields.io/badge/built%20with-DKCutter%20TanStack%20Start-7c3aed.svg)](https://github.com/ncontiero/dkcutter-tanstack-start)
 
+## ✨ Features
+
+- **TanStack Start & Router**: Full-stack React framework with type-safe routing.
+{%- if dkcutter.useShadcn %}
+- **Styling**: Tailwind CSS configured with beautifully designed Shadcn UI components.
+{%- else %}
+- **Styling**: Pre-configured with Tailwind CSS for rapid UI development.
+{%- endif %}
+{%- if dkcutter.useTailwindTypography %}
+- **Typography**: Beautiful typographic defaults for HTML using the Tailwind CSS Typography plugin.
+{%- endif %}
+{%- if dkcutter.authProvider != "none" %}
+- **Authentication**: Pre-configured with {{ "Better Auth" if dkcutter.authProvider == "betterAuth" else dkcutter.authProvider|title }}.
+{%- endif %}
+{%- if dkcutter.usePrisma %}
+- **Database ORM**: Prisma configured for type-safe database access.
+{%- endif %}
+{%- if dkcutter.useTriggerDev %}
+- **Background Jobs**: Integrated with Trigger.dev for serverless background tasks.
+{%- endif %}
+{%- if dkcutter.useTanstackQuery %}
+- **Data Fetching**: Powerful asynchronous state management via TanStack Query.
+{%- endif %}
+{%- if dkcutter.useUnpic %}
+- **Optimized Images**: High-performance, framework-agnostic image component via Unpic.
+{%- endif %}
+
 ## 🚀 Getting Started
 
 To run this application locally:
