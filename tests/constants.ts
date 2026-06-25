@@ -10,6 +10,7 @@ export const SUPPORTED_COMBINATIONS = [
   { additionalTools: "prisma" },
   { additionalTools: "triggerDev" },
   { additionalTools: "tanstackQuery" },
+  { additionalTools: "shadcn" },
   { additionalTools: "tailwindTypography" },
   { additionalTools: "unpic" },
   { automatedDepsUpdater: "renovate" },
@@ -31,12 +32,12 @@ export const SUPPORTED_COMBINATIONS = [
   {
     authProvider: "clerk",
     additionalTools:
-      "husky,lintStaged,nanoStaged,commitlint,prisma,triggerDev,tanstackQuery,tailwindTypography,unpic",
+      "husky,lintStaged,nanoStaged,commitlint,prisma,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
   },
   {
     authProvider: "betterAuth",
     additionalTools:
-      "husky,lintStaged,nanoStaged,commitlint,prisma,triggerDev,tanstackQuery,tailwindTypography,unpic",
+      "husky,lintStaged,nanoStaged,commitlint,prisma,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
   },
 ];
 

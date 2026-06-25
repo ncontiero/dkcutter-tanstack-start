@@ -15,8 +15,9 @@ export interface ContextProps {
   usePrisma: boolean;
   useTriggerDev: boolean;
   useTanstackQuery: boolean;
-  useUnpic: boolean;
+  useShadcn: boolean;
   useTailwindTypography: boolean;
+  useUnpic: boolean;
   automatedDepsUpdater: AutomatedDepsUpdater;
   deployHost: DeployHost;
   useNitro: boolean;
