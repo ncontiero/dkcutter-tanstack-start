@@ -12,6 +12,7 @@ export interface ContextProps {
   useNanoStaged: boolean;
   useCommitlint: boolean;
   useReactCompiler: boolean;
+  useReactHookForm: boolean;
   useEslintWithType: boolean;
   usePrisma: boolean;
   useTriggerDev: boolean;

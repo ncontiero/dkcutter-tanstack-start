@@ -26,6 +26,7 @@ const CTX: ContextProps = {
   useNanoStaged: toBoolean("{{ dkcutter.useNanoStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
   useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
+  useReactHookForm: toBoolean("{{ dkcutter.useReactHookForm }}"),
   useEslintWithType: toBoolean("{{ dkcutter.useEslintWithType }}"),
   usePrisma: toBoolean("{{ dkcutter.usePrisma }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
@@ -172,6 +173,10 @@ async function main() {
       "@rolldown/plugin-babel",
       "babel-plugin-react-compiler",
     );
+  }
+
+  if (!CTX.useReactHookForm) {
+    REMOVE_DEPS.push("@hookform/resolvers", "react-hook-form");
   }
 
   if (CTX.usePrisma) {

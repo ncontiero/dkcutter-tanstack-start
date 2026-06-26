@@ -14,6 +14,9 @@
 {%- if dkcutter.useServerComponents %}
 - **React Server Components**: Experimental RSC functionality enabled for optimized server-side rendering.
 {%- endif %}
+{%- if dkcutter.useReactHookForm %}
+- **Form Validation**: Type-safe and performant forms via React Hook Form and Zod.
+{%- endif %}
 {%- if dkcutter.useShadcn %}
 - **Styling**: Tailwind CSS configured with beautifully designed Shadcn UI components.
 {%- else %}
