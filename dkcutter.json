@@ -65,6 +65,11 @@
         "description": "Lint commit messages."
       },
       {
+        "title": "React Compiler",
+        "value": "reactCompiler",
+        "description": "Automatically optimize React component renders."
+      },
+      {
         "title": "ESlint + Type Information",
         "value": "eslintTypeInfo",
         "description": "Enable ESLint rules that require type information."

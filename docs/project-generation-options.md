@@ -22,6 +22,7 @@ This page describes all the template options that will be prompted by the [DKCut
   - [Lint Staged](https://github.com/lint-staged/lint-staged): Run linters against staged git files.
   - [Nano Staged](https://github.com/usmanyunusov/nano-staged): Tiny tool to run commands for modified, staged, and committed files.
   - [Commitlint](https://commitlint.js.org/): Lint commit messages.
+  - [React Compiler](https://react.dev/learn/react-compiler): Automatically optimize React component renders.
   - [ESLint + Type Information](https://typescript-eslint.io/getting-started/typed-linting): Enable ESLint rules that require type information.
   - [Prisma](https://www.prisma.io/): Next-generation ORM for Node.js & TypeScript.
   - [Trigger.dev](https://trigger.dev/): The open source background jobs platform.

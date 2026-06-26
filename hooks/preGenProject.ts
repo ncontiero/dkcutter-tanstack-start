@@ -3,6 +3,7 @@
 // {{ dkcutter.add("useLintStaged", "{{ 'lintStaged' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useNanoStaged", "{{ 'nanoStaged' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useCommitlint", "{{ 'commitlint' in dkcutter.additionalTools }}") }}
+// {{ dkcutter.add("useReactCompiler", "{{ 'reactCompiler' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useEslintWithType", "{{ 'eslintTypeInfo' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("usePrisma", "{{ 'prisma' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useTriggerDev", "{{ 'triggerDev' in dkcutter.additionalTools }}") }}

@@ -25,6 +25,7 @@ const CTX: ContextProps = {
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
   useNanoStaged: toBoolean("{{ dkcutter.useNanoStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
+  useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
   useEslintWithType: toBoolean("{{ dkcutter.useEslintWithType }}"),
   usePrisma: toBoolean("{{ dkcutter.usePrisma }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
@@ -164,6 +165,13 @@ async function main() {
       path.join(projectDir, ".husky", "commit-msg"),
     );
     delete SCRIPTS["commit-msg"];
+  }
+
+  if (!CTX.useReactCompiler) {
+    REMOVE_DEV_DEPS.push(
+      "@rolldown/plugin-babel",
+      "babel-plugin-react-compiler",
+    );
   }
 
   if (CTX.usePrisma) {

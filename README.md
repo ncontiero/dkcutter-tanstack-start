@@ -61,7 +61,7 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the author name? … Nicolas Contiero <https://github.com/ncontiero>
 ✔ What is the project version? … 0.1.0
 ✔ Which Authentication Provider would you like to use? › None / Clerk / Better Auth
-✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Shadcn, Tailwind CSS Typography, Unpic
+✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, React Compiler, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Shadcn, Tailwind CSS Typography, Unpic
 ✔ Would you like to enable React Server Components (RSC)? (Experimental) … No / Yes
 ✔ Which Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
 ✔ Which Deployment Host would you like to use? › None / Cloudflare / Netlify / Nitro (agnostic) / Vercel
@@ -89,21 +89,21 @@ Now take a look at your repo. Don't forget to carefully look at the generated `R
 
 If you want to bypass the interactive prompts and start faster, you can provide configuration via CLI flags. All options in `dkcutter.json` are available as flags:
 
-| Flag                              | Description                                                                                                                                                                            |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--projectName <string>`          | The Project name.                                                                                                                                                                      |
-| `--projectSlug <string>`          | The Project Slug.                                                                                                                                                                      |
-| `--description <string>`          | The Project description.                                                                                                                                                               |
-| `--authorName <string>`           | The author name.                                                                                                                                                                       |
-| `--projectVersion <string>`       | The project version.                                                                                                                                                                   |
-| `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                                                     |
-| `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `eslintTypeInfo`, `prisma`, `triggerDev`, `tanstackQuery`, `shadcn`, `tailwindTypography`, `unpic`). |
-| `--useServerComponents [boolean]` | Indicates whether the project should use React Server Components (RSC) (Experimental in TanStack Start).                                                                               |
-| `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                                                |
-| `--deployHost <string>`           | Select the Deployment Host (`none`, `cloudflare`, `netlify`, `nitro`, `vercel`).                                                                                                       |
-| `--useBunRuntime [boolean]`       | Use Bun as the Server Runtime (only when using `bun` as package manager).                                                                                                              |
-| `--installDependencies [boolean]` | Indicates whether to automatically install dependencies after generation.                                                                                                              |
-| `--initializeGit [boolean]`       | Indicates whether to initialize a git repository and make an initial commit.                                                                                                           |
+| Flag                              | Description                                                                                                                                                                                             |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--projectName <string>`          | The Project name.                                                                                                                                                                                       |
+| `--projectSlug <string>`          | The Project Slug.                                                                                                                                                                                       |
+| `--description <string>`          | The Project description.                                                                                                                                                                                |
+| `--authorName <string>`           | The author name.                                                                                                                                                                                        |
+| `--projectVersion <string>`       | The project version.                                                                                                                                                                                    |
+| `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                                                                      |
+| `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `reactCompiler`, `eslintTypeInfo`, `prisma`, `triggerDev`, `tanstackQuery`, `shadcn`, `tailwindTypography`, `unpic`). |
+| `--useServerComponents [boolean]` | Indicates whether the project should use React Server Components (RSC) (Experimental in TanStack Start).                                                                                                |
+| `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                                                                 |
+| `--deployHost <string>`           | Select the Deployment Host (`none`, `cloudflare`, `netlify`, `nitro`, `vercel`).                                                                                                                        |
+| `--useBunRuntime [boolean]`       | Use Bun as the Server Runtime (only when using `bun` as package manager).                                                                                                                               |
+| `--installDependencies [boolean]` | Indicates whether to automatically install dependencies after generation.                                                                                                                               |
+| `--initializeGit [boolean]`       | Indicates whether to initialize a git repository and make an initial commit.                                                                                                                            |
 
 [See here for more information about options][options-url].
 

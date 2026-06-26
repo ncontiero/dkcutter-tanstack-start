@@ -11,6 +11,7 @@ export interface ContextProps {
   useLintStaged: boolean;
   useNanoStaged: boolean;
   useCommitlint: boolean;
+  useReactCompiler: boolean;
   useEslintWithType: boolean;
   usePrisma: boolean;
   useTriggerDev: boolean;

@@ -8,6 +8,9 @@
 ## ✨ Features
 
 - **TanStack Start & Router**: Full-stack React framework with type-safe routing.
+{%- if dkcutter.useReactCompiler %}
+- **React Compiler**: Optimized component rendering automatically out-of-the-box (Experimental).
+{%- endif %}
 {%- if dkcutter.useServerComponents %}
 - **React Server Components**: Experimental RSC functionality enabled for optimized server-side rendering.
 {%- endif %}
