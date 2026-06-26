@@ -103,6 +103,10 @@
     "choicesType": "multiselect",
     "promptMessage": "Which {{ colors.blue('Additional Tools') }} would you like to use?"
   },
+  "useServerComponents": {
+    "value": false,
+    "promptMessage": "Would you like to enable {{ colors.blue('React Server Components (RSC)') }}? {{ colors.yellow('(Experimental)') }}"
+  },
   "automatedDepsUpdater": {
     "value": "none",
     "choices": [

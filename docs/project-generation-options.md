@@ -30,6 +30,8 @@ This page describes all the template options that will be prompted by the [DKCut
   - [Tailwind CSS Typography](https://github.com/tailwindlabs/tailwindcss-typography): A plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML.
   - [Unpic](https://unpic.pics): High-performance, framework-agnostic image component.
 
+- **React Server Components**: Indicates whether the project should enable React Server Components (RSC) functionality (Experimental in TanStack Start). [See more](https://tanstack.com/start/latest/docs/framework/react/guide/server-components).
+
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
   - None
   - [Mend Renovate](https://docs.renovatebot.com/)

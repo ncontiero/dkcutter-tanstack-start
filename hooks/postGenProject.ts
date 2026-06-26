@@ -29,6 +29,7 @@ const CTX: ContextProps = {
   useShadcn: toBoolean("{{ dkcutter.useShadcn }}"),
   useTailwindTypography: toBoolean("{{ dkcutter.useTailwindTypography }}"),
   useUnpic: toBoolean("{{ dkcutter.useUnpic }}"),
+  useServerComponents: toBoolean("{{ dkcutter.useServerComponents }}"),
   automatedDepsUpdater:
     "{{ dkcutter.automatedDepsUpdater }}" as AutomatedDepsUpdater,
   deployHost: "{{ dkcutter.deployHost }}" as DeployHost,
@@ -227,6 +228,14 @@ async function main() {
 
   if (!CTX.usePrisma && CTX.authProvider !== "betterAuth" && !CTX.useShadcn) {
     FILES_TO_REMOVE.push(libFolder);
+  }
+
+  if (CTX.useServerComponents) {
+    logger.warn(
+      "Server components are experimental. See https://tanstack.com/start/latest/docs/framework/react/guide/server-components for more information.",
+    );
+  } else {
+    REMOVE_DEV_DEPS.push("@vitejs/plugin-rsc");
   }
 
   const githubFolder = path.join(projectDir, ".github");

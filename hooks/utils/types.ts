@@ -18,6 +18,7 @@ export interface ContextProps {
   useShadcn: boolean;
   useTailwindTypography: boolean;
   useUnpic: boolean;
+  useServerComponents: boolean;
   automatedDepsUpdater: AutomatedDepsUpdater;
   deployHost: DeployHost;
   useNitro: boolean;
