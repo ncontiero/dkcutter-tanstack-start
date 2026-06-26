@@ -8,6 +8,9 @@
 ## ✨ Features
 
 - **TanStack Start & Router**: Full-stack React framework with type-safe routing.
+{%- if dkcutter.useServerComponents %}
+- **React Server Components**: Experimental RSC functionality enabled for optimized server-side rendering.
+{%- endif %}
 {%- if dkcutter.useShadcn %}
 - **Styling**: Tailwind CSS configured with beautifully designed Shadcn UI components.
 {%- else %}

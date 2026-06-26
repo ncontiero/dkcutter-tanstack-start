@@ -62,15 +62,15 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the project version? … 0.1.0
 ✔ Which Authentication Provider would you like to use? › None / Clerk / Better Auth
 ✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Shadcn, Tailwind CSS Typography, Unpic
+✔ Would you like to enable React Server Components (RSC)? (Experimental) … No / Yes
 ✔ Which Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
 ✔ Which Deployment Host would you like to use? › None / Cloudflare / Netlify / Nitro (agnostic) / Vercel
 ✔ Bun detected. Use it as the Server Runtime for My Awesome Project? … No / Yes
+✔ Would you like to install the dependencies? … No / Yes
+✔ Would you like to initialize a git repository and create an initial commit? … No / Yes
 
 Next steps:
   cd my-awesome-project
-  pnpm install
-  git add .
-  git commit -m "initial commit"
   pnpm dev
 
 ✔ Project created!
