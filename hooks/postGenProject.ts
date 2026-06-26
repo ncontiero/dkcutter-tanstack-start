@@ -7,6 +7,7 @@ import type {
 } from "./utils/types";
 import path from "node:path";
 import { getPackageInfo, logger, remove } from "dkcutter/utils";
+import { logNextSteps } from "./helpers/logNextSteps";
 import { toBoolean } from "./utils/coerce";
 import { appendToGitignore } from "./utils/files";
 import { getPkgManagerVersion } from "./utils/getPkgManagerVersion";
@@ -299,6 +300,8 @@ async function main() {
   for (const file of FILES_TO_REMOVE) {
     await remove(file);
   }
+
+  logNextSteps(CTX);
 }
 
 main().catch((error) => {
