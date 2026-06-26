@@ -23,6 +23,7 @@ export interface ContextProps {
   deployHost: DeployHost;
   useNitro: boolean;
   installDependencies: boolean;
+  initializeGit: boolean;
 }
 
 export interface SetFlagProps {

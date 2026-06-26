@@ -59,6 +59,6 @@ export function constructArgs(combination: Combination, toolToInsert?: string) {
   const testName = name.slice(0, -1).toLowerCase().replaceAll(",", "_");
   const projectSlug = testName.concat(Math.random().toString().slice(2, 7));
   args.unshift("--projectSlug", projectSlug);
-  args.push("--installDependencies", "false");
+  args.push("--installDependencies", "false", "--initializeGit", "false");
   return { args, testName, slug: projectSlug };
 }

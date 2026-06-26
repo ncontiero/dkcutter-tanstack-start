@@ -153,6 +153,10 @@
     "value": true,
     "promptMessage": "Would you like to install the dependencies?"
   },
+  "initializeGit": {
+    "value": true,
+    "promptMessage": "Would you like to initialize a git repository and create an initial commit?"
+  },
   "_pkgManager": "{{ dkcutter.pkgManager }}",
   "_ciInstall": "{{ _pkgManager }} {{ 'ci' if _pkgManager == 'npm' else 'install' }}{{ ' --frozen-lockfile' if _pkgManager in ['yarn', 'pnpm', 'bun'] }}"
 }

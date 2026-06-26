@@ -7,6 +7,7 @@ import type {
 } from "./utils/types";
 import path from "node:path";
 import { getPackageInfo, logger, remove } from "dkcutter/utils";
+import { initializeGit, stageAndCommit } from "./helpers/git";
 import { installDependencies } from "./helpers/installDependencies";
 import { logNextSteps } from "./helpers/logNextSteps";
 import { toBoolean } from "./utils/coerce";
@@ -15,7 +16,7 @@ import { getPkgManagerVersion } from "./utils/getPkgManagerVersion";
 import { setFlag } from "./utils/setFlag";
 import { updatePackageJson } from "./utils/updatePackageJson";
 
-// const TEMPLATE_REPO = "ncontiero/dkcutter-tanstack-start";
+const TEMPLATE_REPO = "ncontiero/dkcutter-tanstack-start";
 const CTX: ContextProps = {
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
@@ -38,6 +39,7 @@ const CTX: ContextProps = {
   // useNitro = deployHost in ["nitro", "vercel"]
   useNitro: toBoolean("{{ dkcutter.useNitro }}"),
   installDependencies: toBoolean("{{ dkcutter.installDependencies }}"),
+  initializeGit: toBoolean("{{ dkcutter.initializeGit }}"),
 };
 
 async function setBetterAuthSecretKey(filePath: string) {
@@ -303,8 +305,17 @@ async function main() {
     await remove(file);
   }
 
+  if (CTX.initializeGit) {
+    await initializeGit(projectDir);
+  }
   if (CTX.installDependencies) {
     await installDependencies(projectDir, CTX.pkgManager);
+  }
+  if (CTX.initializeGit) {
+    await stageAndCommit(
+      projectDir,
+      `feat: initial commit from ${TEMPLATE_REPO}`,
+    );
   }
 
   logNextSteps(CTX);

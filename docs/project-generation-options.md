@@ -47,3 +47,5 @@ This page describes all the template options that will be prompted by the [DKCut
 - **Use Bun Runtime**: Indicates whether the project should use [Bun](https://bun.sh/) as the server runtime (only prompted if Bun is the chosen package manager).
 
 - **Install Dependencies**: Indicates whether the dependencies should be automatically installed right after project generation.
+
+- **Initialize Git**: Indicates whether a Git repository should be initialized with an initial commit.
