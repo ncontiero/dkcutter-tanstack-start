@@ -22,6 +22,7 @@ export interface ContextProps {
   automatedDepsUpdater: AutomatedDepsUpdater;
   deployHost: DeployHost;
   useNitro: boolean;
+  installDependencies: boolean;
 }
 
 export interface SetFlagProps {

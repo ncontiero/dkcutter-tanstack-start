@@ -5,7 +5,7 @@ export function logNextSteps(ctx: ContextProps) {
   const pkgManager = ctx.pkgManager;
   const commands = [
     `cd ${ctx.projectSlug}`,
-    `${pkgManager} install`,
+    ...(!ctx.installDependencies ? [`${pkgManager} install`] : []),
     "git init",
     "git add .",
     `git commit -m "initial commit"`,

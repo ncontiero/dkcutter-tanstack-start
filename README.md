@@ -102,6 +102,7 @@ If you want to bypass the interactive prompts and start faster, you can provide 
 | `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                                                |
 | `--deployHost <string>`           | Select the Deployment Host (`none`, `cloudflare`, `netlify`, `nitro`, `vercel`).                                                                                                       |
 | `--useBunRuntime [boolean]`       | Use Bun as the Server Runtime (only when using `bun` as package manager).                                                                                                              |
+| `--installDependencies [boolean]` | Indicates whether to automatically install dependencies after generation.                                                                                                              |
 
 [See here for more information about options][options-url].
 

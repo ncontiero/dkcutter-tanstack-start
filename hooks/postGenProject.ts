@@ -7,6 +7,7 @@ import type {
 } from "./utils/types";
 import path from "node:path";
 import { getPackageInfo, logger, remove } from "dkcutter/utils";
+import { installDependencies } from "./helpers/installDependencies";
 import { logNextSteps } from "./helpers/logNextSteps";
 import { toBoolean } from "./utils/coerce";
 import { appendToGitignore } from "./utils/files";
@@ -36,6 +37,7 @@ const CTX: ContextProps = {
   deployHost: "{{ dkcutter.deployHost }}" as DeployHost,
   // useNitro = deployHost in ["nitro", "vercel"]
   useNitro: toBoolean("{{ dkcutter.useNitro }}"),
+  installDependencies: toBoolean("{{ dkcutter.installDependencies }}"),
 };
 
 async function setBetterAuthSecretKey(filePath: string) {
@@ -299,6 +301,10 @@ async function main() {
 
   for (const file of FILES_TO_REMOVE) {
     await remove(file);
+  }
+
+  if (CTX.installDependencies) {
+    await installDependencies(projectDir, CTX.pkgManager);
   }
 
   logNextSteps(CTX);
