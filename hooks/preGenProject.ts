@@ -12,5 +12,7 @@
 // {{ dkcutter.add("useTailwindTypography", "{{ 'tailwindTypography' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useUnpic", "{{ 'unpic' in dkcutter.additionalTools }}") }}
 
+// {{ dkcutter.add("useCloudflare", "{{ dkcutter.deployHost == 'cloudflare' }}") }}
+// {{ dkcutter.add("useNetlify", "{{ dkcutter.deployHost == 'netlify' }}") }}
 // Vercel uses Nitro to deploy.
 // {{ dkcutter.add("useNitro", "{{ dkcutter.deployHost in ['nitro', 'vercel'] }}") }}

@@ -7,6 +7,7 @@ export const SUPPORTED_COMBINATIONS = [
   { additionalTools: "lintStaged" },
   { additionalTools: "nanoStaged" },
   { additionalTools: "commitlint" },
+  { additionalTools: "reactCompiler" },
   { additionalTools: "prisma" },
   { additionalTools: "triggerDev" },
   { additionalTools: "tanstackQuery" },
@@ -23,6 +24,24 @@ export const SUPPORTED_COMBINATIONS = [
   { deployHost: "cloudflare", useServerComponents: true },
   { deployHost: "netlify", useServerComponents: true },
   { deployHost: "nitro", useServerComponents: true },
+  { deployHost: "cloudflare", additionalTools: "reactCompiler" },
+  { deployHost: "netlify", additionalTools: "reactCompiler" },
+  { deployHost: "nitro", additionalTools: "reactCompiler" },
+  {
+    deployHost: "cloudflare",
+    additionalTools: "reactCompiler",
+    useServerComponents: true,
+  },
+  {
+    deployHost: "netlify",
+    additionalTools: "reactCompiler",
+    useServerComponents: true,
+  },
+  {
+    deployHost: "nitro",
+    additionalTools: "reactCompiler",
+    useServerComponents: true,
+  },
   { deployHost: "nitro", useBunRuntime: true },
   { deployHost: "vercel", useBunRuntime: true },
   { authProvider: "clerk", additionalTools: "prisma,tanstackQuery" },
@@ -35,7 +54,8 @@ export const SUPPORTED_COMBINATIONS = [
   {
     authProvider: "betterAuth",
     additionalTools:
-      "husky,lintStaged,nanoStaged,commitlint,prisma,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
+      "husky,lintStaged,nanoStaged,commitlint,reactCompiler,prisma,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
+    useServerComponents: true,
   },
 ];
 

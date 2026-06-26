@@ -26,35 +26,13 @@ const config = defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
-{%- if dkcutter.deployHost != "cloudflare" %}
-{%- if dkcutter.useServerComponents %}
+{%- if dkcutter.useReactCompiler or dkcutter.useCloudflare or dkcutter.useServerComponents %}
   plugins: [
     devtools(),
     tailwindcss(),
-    tanstackStart({
-      rsc: {
-        enabled: true,
-      },
-    }),
-    rsc(),
-{%- if dkcutter.deployHost == "netlify" %}
-    netlify(),
-{%- elif dkcutter.useNitro %}
-    nitro(),
-{%- endif %}
-    viteReact(),
-{%- if dkcutter.useReactCompiler %}
-    babel({ presets: [reactCompilerPreset()] }),
-{%- endif %}
-  ],
-{%- else %}
-  plugins: [devtools(), tailwindcss(), tanstackStart(),{% if dkcutter.deployHost == "netlify" %} netlify(),{% elif dkcutter.useNitro %} nitro(),{% endif %} viteReact(){{ ", babel({ presets: [reactCompilerPreset()] })"|safe if dkcutter.useReactCompiler }}],
-{%- endif %}
-{%- else %}
-  plugins: [
-    devtools(),
-    tailwindcss(),
+{%- if dkcutter.useCloudflare %}
     cloudflare({ viteEnvironment: { name: "ssr" } }),
+{%- endif %}
 {%- if dkcutter.useServerComponents %}
     tanstackStart({
       rsc: {
@@ -65,11 +43,18 @@ const config = defineConfig({
 {%- else %}
     tanstackStart(),
 {%- endif %}
+{%- if dkcutter.useNetlify %}
+    netlify(),
+{%- elif dkcutter.useNitro %}
+    nitro(),
+{%- endif %}
     viteReact(),
 {%- if dkcutter.useReactCompiler %}
     babel({ presets: [reactCompilerPreset()] }),
 {%- endif %}
   ],
+{%- else %}
+  plugins: [devtools(), tailwindcss(), tanstackStart(), {% if dkcutter.useNetlify %}netlify(), {% elif dkcutter.useNitro %}nitro(), {% endif %}viteReact()],
 {%- endif %}
 {%- if dkcutter.useNitro and dkcutter.useBunRuntime %}
   nitro: {
