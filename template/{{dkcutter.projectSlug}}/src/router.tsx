@@ -5,6 +5,9 @@ import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 {%- if dkcutter.useTanstackQuery %}
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 {%- endif %}
+{%- if dkcutter.useParaglideJs %}
+import { deLocalizeUrl, localizeUrl } from "./paraglide/runtime";
+{%- endif %}
 import { routeTree } from "./routeTree.gen";
 
 export function getRouter() {
@@ -24,6 +27,12 @@ export function getRouter() {
     scrollRestoration: true,
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
+{%- if dkcutter.useParaglideJs %}
+    rewrite: {
+      input: ({ url }) => deLocalizeUrl(url),
+      output: ({ url }) => localizeUrl(url),
+    },
+{%- endif %}
   });
 
   {% if dkcutter.useTanstackQuery -%}

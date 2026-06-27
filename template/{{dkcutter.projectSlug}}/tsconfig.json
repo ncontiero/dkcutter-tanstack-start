@@ -19,6 +19,7 @@
     // JavaScript and Strictness
     "types": ["vite/client"],
     "allowImportingTsExtensions": true,
+    "allowJs": true,
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,

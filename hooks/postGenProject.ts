@@ -27,6 +27,7 @@ const CTX: ContextProps = {
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
   useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
   useReactHookForm: toBoolean("{{ dkcutter.useReactHookForm }}"),
+  useParaglideJs: toBoolean("{{ dkcutter.useParaglideJs }}"),
   useEslintWithType: toBoolean("{{ dkcutter.useEslintWithType }}"),
   usePrisma: toBoolean("{{ dkcutter.usePrisma }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
@@ -177,6 +178,19 @@ async function main() {
 
   if (!CTX.useReactHookForm) {
     REMOVE_DEPS.push("@hookform/resolvers", "react-hook-form");
+  }
+
+  if (CTX.useParaglideJs) {
+    SCRIPTS.postinstall = `${SCRIPTS.postinstall} && ${CTX.pkgManager} run paraglide:compile`;
+  } else {
+    REMOVE_DEPS.push("@inlang/paraglide-js-react");
+    REMOVE_DEV_DEPS.push("@inlang/paraglide-js");
+    FILES_TO_REMOVE.push(
+      path.join(projectDir, "messages"),
+      path.join(projectDir, "project.inlang"),
+      path.join(srcFolder, "server.ts"),
+    );
+    delete SCRIPTS["paraglide:compile"];
   }
 
   if (CTX.usePrisma) {

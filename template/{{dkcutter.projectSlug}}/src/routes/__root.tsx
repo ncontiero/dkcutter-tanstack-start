@@ -18,6 +18,9 @@ import {
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
+{%- if dkcutter.useParaglideJs %}
+import { getLocale } from "@/paraglide/runtime";
+{%- endif %}
 
 interface MyRouterContext {% if dkcutter.useTanstackQuery %}{
   queryClient: QueryClient;
@@ -53,7 +56,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={{ "{getLocale()}"|safe if dkcutter.useParaglideJs else '"en"'|safe }} suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>

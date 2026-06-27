@@ -13,6 +13,7 @@ export interface ContextProps {
   useCommitlint: boolean;
   useReactCompiler: boolean;
   useReactHookForm: boolean;
+  useParaglideJs: boolean;
   useEslintWithType: boolean;
   usePrisma: boolean;
   useTriggerDev: boolean;

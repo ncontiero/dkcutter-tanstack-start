@@ -1,6 +1,10 @@
 {% if dkcutter.deployHost == "cloudflare" -%}
 import { cloudflare } from "@cloudflare/vite-plugin";
-{% elif dkcutter.deployHost == "netlify" -%}
+{% endif -%}
+{% if dkcutter.useParaglideJs -%}
+import { paraglideVitePlugin } from "@inlang/paraglide-js";
+{% endif -%}
+{% if dkcutter.deployHost == "netlify" -%}
 import netlify from "@netlify/vite-plugin-tanstack-start";
 {% endif -%}
 {% if dkcutter.useReactCompiler -%}
@@ -26,9 +30,27 @@ const config = defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
-{%- if dkcutter.useReactCompiler or dkcutter.useCloudflare or dkcutter.useServerComponents %}
+{%- if dkcutter.useReactCompiler or dkcutter.useCloudflare or dkcutter.useServerComponents or dkcutter.useParaglideJs %}
   plugins: [
     devtools(),
+{%- if dkcutter.useParaglideJs %}
+    paraglideVitePlugin({
+      project: "./project.inlang",
+      outdir: "./src/paraglide",
+      outputStructure: "message-modules",
+      cookieName: "PARAGLIDE_LOCALE",
+      strategy: ["url", "cookie", "preferredLanguage", "baseLocale"],
+      urlPatterns: [
+        {
+          pattern: "/:path(.*)?",
+          localized: [
+            ["en", "/en/:path(.*)?"],
+            // Add your locales here
+          ],
+        },
+      ],
+    }),
+{%- endif %}
     tailwindcss(),
 {%- if dkcutter.useCloudflare %}
     cloudflare({ viteEnvironment: { name: "ssr" } }),

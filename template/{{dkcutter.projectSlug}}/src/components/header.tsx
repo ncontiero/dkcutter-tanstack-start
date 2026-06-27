@@ -1,5 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Moon, Sun } from "lucide-react";
+{%- if dkcutter.useParaglideJs %}
+import { m } from "@/paraglide/messages";
+{%- endif %}
 import { useTheme } from "./theme-provider/hooks";
 
 export function Header() {
@@ -25,7 +28,11 @@ export function Header() {
                 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground [&.active]:text-foreground
               "
             >
+{%- if dkcutter.useParaglideJs %}
+              {m.headerNavHome()}
+{%- else %}
               Home
+{%- endif %}
             </Link>
           </nav>
         </div>
@@ -39,7 +46,11 @@ export function Header() {
               transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring
               focus-visible:outline-none
             "
+{%- if dkcutter.useParaglideJs %}
+            aria-label={m.headerThemeToggle()}
+{%- else %}
             aria-label="Toggle theme"
+{%- endif %}
           >
             {theme === "light" ? (
               <Moon className="size-4.5" />

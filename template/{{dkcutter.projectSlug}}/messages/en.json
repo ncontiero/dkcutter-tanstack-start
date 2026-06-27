@@ -1,0 +1,12 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "headerNavHome": "Home",
+  "headerThemeToggle": "Toggle theme",
+  "poweredBy": "Powered by DKCutter & TanStack Start",
+  "welcomeTitle": "Welcome to {% raw %}{#br/}{#span}{% endraw %}{{ dkcutter.projectName }}{/span}",
+  "getStarted": "Get Started",
+  "startEditing": "Start building your application by editing {% raw %}{#code}{% endraw %}src/routes/index.tsx{/code}.",
+  "documentation": "Documentation",
+  "learnMore": "Learn how to fetch data, handle mutations, and build your full-stack app with TanStack Start.",
+  "readDocs": "Read the docs"
+}

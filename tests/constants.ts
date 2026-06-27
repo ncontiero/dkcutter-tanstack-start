@@ -8,6 +8,7 @@ export const SUPPORTED_COMBINATIONS = [
   { additionalTools: "nanoStaged" },
   { additionalTools: "commitlint" },
   { additionalTools: "reactCompiler" },
+  { additionalTools: "paraglideJs" },
   { additionalTools: "prisma" },
   { additionalTools: "triggerDev" },
   { additionalTools: "tanstackQuery" },

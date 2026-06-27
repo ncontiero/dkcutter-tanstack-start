@@ -1,5 +1,11 @@
+{% if dkcutter.useParaglideJs -%}
+import { ParaglideMessage } from "@inlang/paraglide-js-react";
+{% endif -%}
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, Rocket } from "lucide-react";
+{%- if dkcutter.useParaglideJs %}
+import { m } from "@/paraglide/messages";
+{%- endif %}
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -16,10 +22,31 @@ function Home() {
             "
           >
             <span className="mr-2 flex size-2 animate-pulse rounded-full bg-primary"></span>
+{%- if dkcutter.useParaglideJs %}
+            {m.poweredBy()}
+{%- else %}
             Powered by DKCutter & TanStack Start
+{%- endif %}
           </div>
 
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-7xl">
+{%- if dkcutter.useParaglideJs %}
+            <ParaglideMessage
+              message={m.welcomeTitle}
+              markup={% raw %}{{
+                br: () => <br />,
+                span: ({ children }) => (
+                  <span
+                    className="
+                      bg-linear-to-r from-primary via-primary/60 to-foreground bg-clip-text text-transparent dark:via-none
+                    "
+                  >
+                    {children}
+                  </span>
+                ),
+              }}{% endraw %}
+            />
+{%- else %}
             Welcome to <br />
             <span
               className="
@@ -28,6 +55,7 @@ function Home() {
             >
               {{ dkcutter.projectName }}
             </span>
+{%- endif %}
           </h1>
 
           <p className="mx-auto max-w-2xl text-lg/relaxed text-muted-foreground sm:text-xl">
@@ -50,14 +78,31 @@ function Home() {
               <span className="mr-3 rounded-lg bg-primary/10 p-2 text-primary shadow-sm">
                 <Rocket className="size-5" />
               </span>
+{%- if dkcutter.useParaglideJs %}
+              {m.getStarted()}
+{%- else %}
               Get Started
+{%- endif %}
             </h3>
             <p className="relative z-10 mb-6 text-muted-foreground">
+{%- if dkcutter.useParaglideJs %}
+              <ParaglideMessage
+                message={m.startEditing}
+                markup={% raw %}{{
+                  code: ({ children }) => (
+                    <code className="rounded-sm border bg-muted px-1.5 py-0.5 font-mono text-sm text-primary">
+                      {children}
+                    </code>
+                  ),
+                }}{% endraw %}
+              />
+{%- else %}
               Start building your application by editing{" "}
               <code className="rounded-sm border bg-muted px-1.5 py-0.5 font-mono text-sm text-primary">
                 src/routes/index.tsx
               </code>
               .
+{%- endif %}
             </p>
           </div>
 
@@ -78,14 +123,26 @@ function Home() {
               <span className="mr-3 rounded-lg bg-primary/10 p-2 text-primary shadow-sm">
                 <BookOpen className="size-5" />
               </span>
+{%- if dkcutter.useParaglideJs %}
+              {m.documentation()}
+{%- else %}
               Documentation
+{%- endif %}
             </h3>
             <p className="relative z-10 mb-6 text-muted-foreground">
+{%- if dkcutter.useParaglideJs %}
+              {m.learnMore()}
+{%- else %}
               Learn how to fetch data, handle mutations, and build your
               full-stack app with TanStack Start.
+{%- endif %}
             </p>
             <span className="relative z-10 flex items-center font-medium text-primary group-hover:underline">
+{%- if dkcutter.useParaglideJs %}
+              {m.readDocs()}
+{%- else %}
               Read the docs
+{%- endif %}
               <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
             </span>
           </a>

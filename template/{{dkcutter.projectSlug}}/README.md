@@ -17,6 +17,9 @@
 {%- if dkcutter.useReactHookForm %}
 - **Form Validation**: Type-safe and performant forms via React Hook Form and Zod.
 {%- endif %}
+{%- if dkcutter.useParaglideJs %}
+- **Internationalization**: Fully type-safe i18n via Paraglide JS.
+{%- endif %}
 {%- if dkcutter.useShadcn %}
 - **Styling**: Tailwind CSS configured with beautifully designed Shadcn UI components.
 {%- else %}
