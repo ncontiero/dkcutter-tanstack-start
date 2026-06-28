@@ -23,6 +23,7 @@ export interface ContextProps {
   useTailwindTypography: boolean;
   useUnpic: boolean;
   useServerComponents: boolean;
+  useDockerCompose: boolean;
   automatedDepsUpdater: AutomatedDepsUpdater;
   deployHost: DeployHost;
   useCloudflare: boolean;

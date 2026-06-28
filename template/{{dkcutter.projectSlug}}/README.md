@@ -36,6 +36,9 @@
 {%- endif %}
 {%- if dkcutter.usePrisma %}
 - **Database ORM**: Prisma configured for type-safe database access.
+{%- if dkcutter.useDockerCompose %}
+- **Local Database**: Docker Compose configured for an easy local database setup.
+{%- endif %}
 {%- endif %}
 {%- if dkcutter.useTriggerDev %}
 - **Background Jobs**: Integrated with Trigger.dev for serverless background tasks.

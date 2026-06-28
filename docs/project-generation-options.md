@@ -36,6 +36,8 @@ This page describes all the template options that will be prompted by the [DKCut
 
 - **React Server Components**: Indicates whether the project should enable React Server Components (RSC) functionality (Experimental in TanStack Start). [See more](https://tanstack.com/start/latest/docs/framework/react/guide/server-components).
 
+- **Docker Compose**: Indicates whether to add Docker Compose to the project to easily spin up a local database (only prompted if Prisma is selected).
+
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
   - None
   - [Mend Renovate](https://docs.renovatebot.com/)

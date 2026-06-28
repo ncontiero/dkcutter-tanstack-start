@@ -37,6 +37,7 @@ const CTX: ContextProps = {
   useTailwindTypography: toBoolean("{{ dkcutter.useTailwindTypography }}"),
   useUnpic: toBoolean("{{ dkcutter.useUnpic }}"),
   useServerComponents: toBoolean("{{ dkcutter.useServerComponents }}"),
+  useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
   automatedDepsUpdater:
     "{{ dkcutter.automatedDepsUpdater }}" as AutomatedDepsUpdater,
   deployHost: "{{ dkcutter.deployHost }}" as DeployHost,
@@ -295,6 +296,10 @@ async function main() {
     );
   } else {
     REMOVE_DEV_DEPS.push("@vitejs/plugin-rsc");
+  }
+
+  if (!CTX.useDockerCompose) {
+    FILES_TO_REMOVE.push(path.join(projectDir, "docker-compose.yml"));
   }
 
   const githubFolder = path.join(projectDir, ".github");

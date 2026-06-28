@@ -63,6 +63,7 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ Which Authentication Provider would you like to use? › None / Clerk / Better Auth
 ✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Shadcn, Tailwind CSS Typography, Unpic, React Compiler, React Hook Form, Paraglide JS, Sentry
 ✔ Would you like to enable React Server Components (RSC)? (Experimental) … No / Yes
+✔ Would you like to add Docker Compose for the database? … No / Yes
 ✔ Which Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
 ✔ Which Deployment Host would you like to use? › None / Cloudflare / Netlify / Nitro (agnostic) / Vercel
 ✔ Bun detected. Use it as the Server Runtime for My Awesome Project? … No / Yes
@@ -99,6 +100,7 @@ If you want to bypass the interactive prompts and start faster, you can provide 
 | `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                                                                                                                |
 | `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `eslintTypeInfo`, `prisma`, `triggerDev`, `tanstackQuery`, `shadcn`, `tailwindTypography`, `unpic`, `reactCompiler`, `reactHookForm`, `paraglideJs`, `sentry`). |
 | `--useServerComponents [boolean]` | Indicates whether the project should use React Server Components (RSC) (Experimental in TanStack Start).                                                                                                                                          |
+| `--useDockerCompose [boolean]`    | Indicates whether to add Docker Compose for the database (only available if Prisma is selected).                                                                                                                                                  |
 | `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                                                                                                           |
 | `--deployHost <string>`           | Select the Deployment Host (`none`, `cloudflare`, `netlify`, `nitro`, `vercel`).                                                                                                                                                                  |
 | `--useBunRuntime [boolean]`       | Use Bun as the Server Runtime (only when using `bun` as package manager).                                                                                                                                                                         |

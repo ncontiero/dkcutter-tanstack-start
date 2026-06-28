@@ -127,6 +127,11 @@
     "value": false,
     "promptMessage": "Would you like to enable {{ colors.blue('React Server Components (RSC)') }}? {{ colors.yellow('(Experimental)') }}"
   },
+  "useDockerCompose": {
+    "value": false,
+    "disabled": "{{ 'prisma' not in additionalTools }}",
+    "promptMessage": "Would you like to add {{ colors.blue('Docker Compose') }} for the database?"
+  },
   "automatedDepsUpdater": {
     "value": "none",
     "choices": [
