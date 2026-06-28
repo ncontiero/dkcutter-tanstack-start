@@ -80,6 +80,11 @@
         "description": "Type-safe i18n with localized routing and message bundles."
       },
       {
+        "title": "Sentry",
+        "value": "sentry",
+        "description": "Application monitoring and error tracking software."
+      },
+      {
         "title": "ESlint + Type Information",
         "value": "eslintTypeInfo",
         "description": "Enable ESLint rules that require type information."

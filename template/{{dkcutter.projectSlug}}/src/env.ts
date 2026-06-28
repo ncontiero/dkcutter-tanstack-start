@@ -13,6 +13,10 @@ export const env = createEnv({
 {%- if dkcutter.usePrisma %}
     DATABASE_URL: z.url(),
 {%- endif %}
+{%- if dkcutter.useSentry %}
+    // Sentry
+    SENTRY_AUTH_TOKEN: z.string().min(1),
+{%- endif %}
 {%- if dkcutter.authProvider == "clerk" %}
     // Clerk
     CLERK_SECRET_KEY: z.string().min(1),
@@ -39,6 +43,12 @@ export const env = createEnv({
 {%- if dkcutter.authProvider == "clerk" %}
     // Clerk
     VITE_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+{%- endif %}
+{%- if dkcutter.useSentry %}
+    // Sentry
+    VITE_SENTRY_DSN: z.string().min(1),
+    VITE_SENTRY_ORG: z.string().min(1),
+    VITE_SENTRY_PROJECT: z.string().min(1),
 {%- endif %}
   },
 

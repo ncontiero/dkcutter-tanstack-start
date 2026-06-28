@@ -1,7 +1,18 @@
 import { ncontiero } from "@ncontiero/eslint-config";
 
 export default ncontiero({
-  ignores: ["./src/routeTree.gen.ts"{{ ', "worker-configuration.d.ts"'|safe if dkcutter.deployHost == "cloudflare" }}],
+{%- if dkcutter.useParaglideJs %}
+  ignores: [
+    "project.inlang/README.md",
+    "src/paraglide/**",
+    "src/routeTree.gen.ts",
+{%- if dkcuttter.useCloudflare %}
+    "worker-configuration.d.ts",
+{%- endif %}
+  ],
+{%- else %}
+  ignores: ["src/routeTree.gen.ts"{{ ', "worker-configuration.d.ts"'|safe if dkcutter.useCloudflare }}],
+{%- endif %}
 {%- if dkcutter.useEslintWithType %}
   typescript: {
     tsconfigPath: "./tsconfig.json",

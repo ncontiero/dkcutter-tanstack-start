@@ -20,6 +20,9 @@
 {%- if dkcutter.useParaglideJs %}
 - **Internationalization**: Fully type-safe i18n via Paraglide JS.
 {%- endif %}
+{%- if dkcutter.useSentry %}
+- **Monitoring**: Application monitoring and error tracking via Sentry.
+{%- endif %}
 {%- if dkcutter.useShadcn %}
 - **Styling**: Tailwind CSS configured with beautifully designed Shadcn UI components.
 {%- else %}

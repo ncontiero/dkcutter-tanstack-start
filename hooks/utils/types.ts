@@ -14,6 +14,7 @@ export interface ContextProps {
   useReactCompiler: boolean;
   useReactHookForm: boolean;
   useParaglideJs: boolean;
+  useSentry: boolean;
   useEslintWithType: boolean;
   usePrisma: boolean;
   useTriggerDev: boolean;
@@ -24,6 +25,8 @@ export interface ContextProps {
   useServerComponents: boolean;
   automatedDepsUpdater: AutomatedDepsUpdater;
   deployHost: DeployHost;
+  useCloudflare: boolean;
+  useNetlify: boolean;
   useNitro: boolean;
   installDependencies: boolean;
   initializeGit: boolean;

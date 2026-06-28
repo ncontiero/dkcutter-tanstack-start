@@ -9,6 +9,7 @@ export const SUPPORTED_COMBINATIONS = [
   { additionalTools: "commitlint" },
   { additionalTools: "reactCompiler" },
   { additionalTools: "paraglideJs" },
+  { additionalTools: "sentry" },
   { additionalTools: "prisma" },
   { additionalTools: "triggerDev" },
   { additionalTools: "tanstackQuery" },
@@ -28,6 +29,7 @@ export const SUPPORTED_COMBINATIONS = [
   { deployHost: "cloudflare", additionalTools: "reactCompiler" },
   { deployHost: "netlify", additionalTools: "reactCompiler" },
   { deployHost: "nitro", additionalTools: "reactCompiler" },
+  { authProvider: "clerk", additionalTools: "sentry,paraglideJs" },
   {
     deployHost: "cloudflare",
     additionalTools: "reactCompiler",

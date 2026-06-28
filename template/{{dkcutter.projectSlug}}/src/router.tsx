@@ -1,3 +1,6 @@
+{% if dkcutter.useSentry -%}
+import * as Sentry from "@sentry/tanstackstart-react";
+{% endif -%}
 {% if dkcutter.useTanstackQuery -%}
 import { QueryClient } from "@tanstack/react-query";
 {% endif -%}
@@ -34,6 +37,15 @@ export function getRouter() {
     },
 {%- endif %}
   });
+
+  {% if dkcutter.useSentry -%}
+  if (!router.isServer) {
+    Sentry.addIntegration(
+      Sentry.tanstackRouterBrowserTracingIntegration(router),
+    );
+  }
+
+  {% endif -%}
 
   {% if dkcutter.useTanstackQuery -%}
   setupRouterSsrQueryIntegration({ router, queryClient });

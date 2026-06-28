@@ -28,6 +28,7 @@ const CTX: ContextProps = {
   useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
   useReactHookForm: toBoolean("{{ dkcutter.useReactHookForm }}"),
   useParaglideJs: toBoolean("{{ dkcutter.useParaglideJs }}"),
+  useSentry: toBoolean("{{ dkcutter.useSentry }}"),
   useEslintWithType: toBoolean("{{ dkcutter.useEslintWithType }}"),
   usePrisma: toBoolean("{{ dkcutter.usePrisma }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
@@ -39,6 +40,8 @@ const CTX: ContextProps = {
   automatedDepsUpdater:
     "{{ dkcutter.automatedDepsUpdater }}" as AutomatedDepsUpdater,
   deployHost: "{{ dkcutter.deployHost }}" as DeployHost,
+  useCloudflare: toBoolean("{{ dkcutter.useCloudflare }}"),
+  useNetlify: toBoolean("{{ dkcutter.useNetlify }}"),
   // useNitro = deployHost in ["nitro", "vercel"]
   useNitro: toBoolean("{{ dkcutter.useNitro }}"),
   installDependencies: toBoolean("{{ dkcutter.installDependencies }}"),
@@ -108,7 +111,6 @@ async function main() {
 
   const removeClerk = () => {
     REMOVE_DEPS.push("@clerk/tanstack-react-start");
-    FILES_TO_REMOVE.push(path.join(srcFolder, "start.ts"));
   };
   const removeBetterAuth = () => {
     REMOVE_DEPS.push("@better-auth/prisma-adapter", "better-auth");
@@ -188,9 +190,30 @@ async function main() {
     FILES_TO_REMOVE.push(
       path.join(projectDir, "messages"),
       path.join(projectDir, "project.inlang"),
-      path.join(srcFolder, "server.ts"),
     );
     delete SCRIPTS["paraglide:compile"];
+  }
+
+  if (CTX.useSentry) {
+    const prodOut =
+      CTX.useNitro || CTX.useCloudflare ? ".output/server" : "dist";
+    SCRIPTS.build = `dotenv -e .env.local -- ${SCRIPTS.build} && shx cp instrument.server.mjs ${prodOut}`;
+    SCRIPTS.dev = `dotenv -e .env.local -- cross-env NODE_OPTIONS="--import ./instrument.server.mjs" ${SCRIPTS.dev}`;
+  } else {
+    REMOVE_DEPS.push("@sentry/tanstackstart-react");
+    REMOVE_DEV_DEPS.push("cross-env", "shx");
+    FILES_TO_REMOVE.push(
+      path.join(srcFolder, "client.tsx"),
+      path.join(srcFolder, "instrument.client.ts"),
+      path.join(projectDir, "instrument.server.mjs"),
+    );
+  }
+
+  if (CTX.authProvider !== "clerk" && !CTX.useSentry) {
+    FILES_TO_REMOVE.push(path.join(srcFolder, "start.ts"));
+  }
+  if (!CTX.useParaglideJs && !CTX.useSentry) {
+    FILES_TO_REMOVE.push(path.join(srcFolder, "server.ts"));
   }
 
   if (CTX.usePrisma) {
@@ -203,7 +226,7 @@ async function main() {
       "@prisma/adapter-pg",
       "@prisma/client",
     );
-    REMOVE_DEV_DEPS.push("dotenv-cli", "prisma");
+    REMOVE_DEV_DEPS.push("prisma");
     FILES_TO_REMOVE.push(
       path.join(projectDir, "prisma"),
       path.join(projectDir, "prisma.config.ts"),
@@ -214,6 +237,10 @@ async function main() {
     delete SCRIPTS["db:migrate"];
     delete SCRIPTS["db:studio"];
     delete SCRIPTS["db:seed"];
+  }
+
+  if (!CTX.useSentry && !CTX.usePrisma) {
+    REMOVE_DEV_DEPS.push("dotenv-cli");
   }
 
   if (CTX.useTriggerDev) {
