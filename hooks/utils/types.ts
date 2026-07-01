@@ -1,4 +1,6 @@
-export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
+import type { PackageManager } from "dkcutter/utils";
+
+export type { PackageManager };
 export type AuthProvider = "none" | "clerk" | "betterAuth";
 export type AutomatedDepsUpdater = "none" | "renovate" | "dependabot";
 export type DeployHost = "none" | "cloudflare" | "netlify" | "nitro" | "vercel";
