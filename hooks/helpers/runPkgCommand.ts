@@ -1,7 +1,7 @@
 import type { PackageManager } from "../utils/types";
 import type { SpawnOptions } from "node:child_process";
+import { clackSpinner as spinner } from "dkcutter/utils";
 import { x } from "tinyexec";
-import { spinner } from "../utils/spinner";
 
 interface ExecWithSpinnerProps {
   projectDir: string;
@@ -18,8 +18,7 @@ export async function execWithSpinner({
   stdio = "pipe",
   onDataHandle,
 }: ExecWithSpinnerProps) {
-  spinner.setText(`Running ${pkgManager} ${args.join(" ")}...`);
-  !spinner.running && spinner.start();
+  spinner.start(`Running ${pkgManager} ${args.join(" ")}...`);
 
   const { process } = x(pkgManager, args, {
     nodeOptions: { cwd: projectDir, stdio },
@@ -54,7 +53,7 @@ export async function runPgkCommand({
 }: RunPKGCommandProps) {
   const onDataHandle = (data: Buffer) => {
     const text = data.toString();
-    spinner.setText(
+    spinner.message(
       pkgManager === "pnpm" && text.includes("Progress") && text.includes("|")
         ? (text.split(" | ")[1] ?? "")
         : text,

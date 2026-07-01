@@ -4,6 +4,7 @@ export type AutomatedDepsUpdater = "none" | "renovate" | "dependabot";
 export type DeployHost = "none" | "cloudflare" | "netlify" | "nitro" | "vercel";
 
 export interface ContextProps {
+  default: boolean;
   projectSlug: string;
   pkgManager: PackageManager;
   authProvider: AuthProvider;

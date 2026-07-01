@@ -31,12 +31,12 @@
       {
         "title": "Clerk",
         "value": "clerk",
-        "description": "Hosted user accounts with prebuilt sign-in UI and social providers (managed)."
+        "description": "Hosted user accounts with prebuilt sign-in UI and social providers - managed"
       },
       {
         "title": "Better Auth",
         "value": "betterAuth",
-        "description": "Self-hosted user accounts and sessions (open source, full control)."
+        "description": "Self-hosted user accounts and sessions - open source, full control"
       }
     ],
     "promptMessage": "Which {{ colors.blue('Authentication Provider') }} would you like to use?"
@@ -47,77 +47,77 @@
       {
         "title": "Husky",
         "value": "husky",
-        "description": "Modern native git hooks made easy. (Necessary for Lint Staged and Nano Staged)"
+        "description": "Modern native git hooks made easy - Necessary for Lint Staged and Nano Staged"
       },
       {
         "title": "Lint Staged",
         "value": "lintStaged",
-        "description": "Run linters against staged git files and don't let 💩 slip into your code base! (Requires Husky)"
+        "description": "Run linters against staged git files and don't let 💩 slip into your code base! Requires Husky"
       },
       {
         "title": "Nano Staged",
         "value": "nanoStaged",
-        "description": "Tiny tool to run commands for modified, staged, and committed files in a GIT repository. (Requires Husky)"
+        "description": "Tiny tool to run commands for modified, staged, and committed files in a GIT repository. Requires Husky"
       },
       {
         "title": "Commitlint",
         "value": "commitlint",
-        "description": "Lint commit messages."
+        "description": "Lint commit messages"
       },
       {
         "title": "React Compiler",
         "value": "reactCompiler",
-        "description": "Automatically optimize React component renders."
+        "description": "Automatically optimize React component renders"
       },
       {
         "title": "React Hook Form",
         "value": "reactHookForm",
-        "description": "Performant, flexible and extensible forms with easy-to-use validation."
+        "description": "Performant, flexible and extensible forms with easy-to-use validation"
       },
       {
         "title": "Paraglide JS (i18n)",
         "value": "paraglideJs",
-        "description": "Type-safe i18n with localized routing and message bundles."
+        "description": "Type-safe i18n with localized routing and message bundles"
       },
       {
         "title": "Sentry",
         "value": "sentry",
-        "description": "Application monitoring and error tracking software."
+        "description": "Application monitoring and error tracking software"
       },
       {
         "title": "ESlint + Type Information",
         "value": "eslintTypeInfo",
-        "description": "Enable ESLint rules that require type information."
+        "description": "Enable ESLint rules that require type information"
       },
       {
         "title": "Prisma",
         "value": "prisma",
-        "description": "Next-generation ORM for Node.js & TypeScript."
+        "description": "Next-generation ORM for Node.js & TypeScript"
       },
       {
         "title": "Trigger.dev",
         "value": "triggerDev",
-        "description": "The open source background jobs platform."
+        "description": "The open source background jobs platform"
       },
       {
         "title": "Tanstack Query",
         "value": "tanstackQuery",
-        "description": "Powerful asynchronous state management for TS/JS."
+        "description": "Powerful asynchronous state management for TS/JS"
       },
       {
         "title": "Shadcn",
         "value": "shadcn",
-        "description": "Copy-paste accessible UI components (Tailwind + Radix primitives)."
+        "description": "Copy-paste accessible UI components - Tailwind + Radix primitives"
       },
       {
         "title": "Tailwind CSS Typography",
         "value": "tailwindTypography",
-        "description": "A plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML."
+        "description": "A plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML"
       },
       {
         "title": "Unpic",
         "value": "unpic",
-        "description": "High-performance, framework-agnostic image component."
+        "description": "High-performance, framework-agnostic image component"
       }
     ],
     "choicesType": "multiselect",
@@ -148,23 +148,23 @@
       {
         "title": "Cloudflare",
         "value": "cloudflare",
-        "description": "Deploy to Cloudflare Workers (edge runtime, KV/D1/R2 bindings)."
+        "description": "Deploy to Cloudflare Workers - Edge runtime, KV/D1/R2 bindings"
       },
       {
         "title": "Netlify",
         "value": "netlify",
-        "description": "Deploy to Netlify (Functions and Edge Functions, GitHub-driven)."
+        "description": "Deploy to Netlify - Functions and Edge Functions, GitHub-driven"
       },
       {
         "title": "Nitro (agnostic)",
         "value": "nitro",
-        "description": "Generic Nitro adapter (deploy to any Node-compatible host).",
+        "description": "Generic Nitro adapter - Deploy to any Node-compatible host",
         "selected": "true"
       },
       {
         "title": "Vercel",
         "value": "vercel",
-        "description": "Deploy to Vercel (Serverless Functions and Edge Middleware, GitHub-driven)."
+        "description": "Deploy to Vercel - Serverless Functions and Edge Middleware, GitHub-driven"
       }
     ],
     "promptMessage": "Which {{ colors.blue('Deployment Host') }} would you like to use?"

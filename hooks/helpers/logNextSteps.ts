@@ -1,24 +1,33 @@
 import type { ContextProps } from "../utils/types";
-import { logger } from "dkcutter/utils";
+import * as p from "@clack/prompts";
+import { dim } from "ansis";
 
 export function logNextSteps(ctx: ContextProps) {
-  const pkgManager = ctx.pkgManager;
-  const commands = [`cd ${ctx.projectSlug}`];
+  const {
+    projectSlug,
+    installDependencies,
+    initializeGit,
+    pkgManager,
+    authProvider,
+    usePrisma,
+  } = ctx;
+  const commands = [`cd ${projectSlug}`];
 
-  if (!ctx.installDependencies) {
+  if (!installDependencies) {
     commands.push(`${pkgManager} install`);
   }
-  if (!ctx.initializeGit) {
+  if (!initializeGit) {
     commands.push("git init", "git add .", `git commit -m "initial commit"`);
   }
 
-  if (["betterAuth"].includes(ctx.authProvider) && ctx.usePrisma) {
+  if (["betterAuth"].includes(authProvider) && usePrisma) {
     commands.push(
       `${pkgManager} run db:migrate ${pkgManager === "npm" ? "-- " : ""}--name init`,
     );
   }
-  commands.push(`${ctx.pkgManager} run dev`);
+  commands.push(`${pkgManager} run dev`);
 
-  logger.break();
-  logger.info(`Next steps:\n  ${commands.join("\n  ")}`);
+  p.note(commands.join("\n"), "Next steps", {
+    format: (line: string) => dim(line),
+  });
 }

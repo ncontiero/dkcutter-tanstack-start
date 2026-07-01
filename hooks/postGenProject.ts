@@ -18,6 +18,7 @@ import { updatePackageJson } from "./utils/updatePackageJson";
 
 const TEMPLATE_REPO = "ncontiero/dkcutter-tanstack-start";
 const CTX: ContextProps = {
+  default: toBoolean("{{ dkcutter.default }}"),
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
   authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
@@ -364,13 +365,14 @@ async function main() {
     await remove(file);
   }
 
+  let hasGitInitialized = false;
   if (CTX.initializeGit) {
-    await initializeGit(projectDir);
+    hasGitInitialized = await initializeGit(projectDir, CTX.default);
   }
   if (CTX.installDependencies) {
     await installDependencies(projectDir, CTX.pkgManager);
   }
-  if (CTX.initializeGit) {
+  if (CTX.initializeGit && hasGitInitialized) {
     await stageAndCommit(
       projectDir,
       `feat: initial commit from ${TEMPLATE_REPO}`,
