@@ -379,7 +379,7 @@ async function main() {
     );
   }
 
-  logNextSteps(CTX);
+  logNextSteps(CTX, hasGitInitialized);
 }
 
 main().catch((error) => {

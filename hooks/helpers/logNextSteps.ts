@@ -2,7 +2,7 @@ import type { ContextProps } from "../utils/types";
 import * as p from "@clack/prompts";
 import { dim } from "ansis";
 
-export function logNextSteps(ctx: ContextProps) {
+export function logNextSteps(ctx: ContextProps, hasGitInitialized: boolean) {
   const {
     projectSlug,
     installDependencies,
@@ -16,7 +16,7 @@ export function logNextSteps(ctx: ContextProps) {
   if (!installDependencies) {
     commands.push(`${pkgManager} install`);
   }
-  if (!initializeGit) {
+  if (!initializeGit && !hasGitInitialized) {
     commands.push("git init", "git add .", `git commit -m "initial commit"`);
   }
 
