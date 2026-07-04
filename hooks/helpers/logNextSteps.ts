@@ -16,7 +16,7 @@ export function logNextSteps(ctx: ContextProps, hasGitInitialized: boolean) {
   if (!installDependencies) {
     commands.push(`${pkgManager} install`);
   }
-  if (!initializeGit && !hasGitInitialized) {
+  if (!initializeGit || !hasGitInitialized) {
     commands.push("git init", "git add .", `git commit -m "initial commit"`);
   }
 
