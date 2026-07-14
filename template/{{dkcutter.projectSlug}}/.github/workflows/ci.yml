@@ -38,8 +38,8 @@ jobs:
       - name: Validate PR commits with commitlint
         if: github.event_name == 'pull_request'
         run: |
-          {{ 'npx' if dkcutter.pkgManager == 'npm' else dkcutter.pkgManager }} commitlint /
-          --from {% raw %}${{ github.event.pull_request.base.sha }}{% endraw %} /
-          --to {% raw %}${{ github.event.pull_request.head.sha }}{% endraw %} /
-          --verbose
+          {{ 'npx' if dkcutter.pkgManager == 'npm' else dkcutter.pkgManager }} commitlint \
+            --from {% raw %}${{ github.event.pull_request.base.sha }}{% endraw %} \
+            --to {% raw %}${{ github.event.pull_request.head.sha }}{% endraw %} \
+            --verbose
 {% endif %}
