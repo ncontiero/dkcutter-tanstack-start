@@ -271,7 +271,7 @@ async function main() {
   }
 
   if (!CTX.useShadcn) {
-    REMOVE_DEPS.push("class-variance-authority", "clsx", "tailwind-merge");
+    REMOVE_DEPS.push("class-variance-authority", "cn");
     REMOVE_DEV_DEPS.push("tw-animate-css", "shadcn");
     FILES_TO_REMOVE.push(
       path.join(projectDir, "components.json"),

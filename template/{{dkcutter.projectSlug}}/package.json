@@ -50,13 +50,12 @@
     "@unpic/react": "1.0.2",
     "better-auth": "1.7.4",
     "class-variance-authority": "0.7.1",
-    "clsx": "2.1.1",
+    "cn": "0.3.0",
     "lucide-react": "1.45.0",
     "nitro": "3.0.260903-beta",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-hook-form": "7.88.0",
-    "tailwind-merge": "3.6.0",
     "zod": "4.6.2"
   },
   "devDependencies": {
