@@ -22,6 +22,7 @@
     "allowJs": true,
     "strict": true,
     "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
 
@@ -29,7 +30,6 @@
     "noEmit": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
-    "noUncheckedSideEffectImports": true
   },
   "include": ["**/*.ts", "**/*.tsx"]
 }
