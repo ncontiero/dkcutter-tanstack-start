@@ -103,6 +103,6 @@
     "node": ">=24"
   },
   "{{ 'nano-staged' if dkcutter.useNanoStaged else 'lint-staged' }}": {
-    "*": "{{ dkcutter.pkgManager }} run lint:fix"
+    "*": "{{ dkcutter.pkgManager }} eslint --fix"
   }
 }
