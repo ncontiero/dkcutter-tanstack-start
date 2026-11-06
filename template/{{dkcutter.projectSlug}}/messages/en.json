@@ -8,5 +8,12 @@
   "startEditing": "Start building your application by editing {% raw %}{#code}{% endraw %}src/routes/index.tsx{/code}.",
   "documentation": "Documentation",
   "learnMore": "Learn how to fetch data, handle mutations, and build your full-stack app with TanStack Start.",
-  "readDocs": "Read the docs"
+  "readDocs": "Read the docs",
+  "errorTitle": "Something went wrong",
+  "errorDescription": "An unexpected error occurred. Try again, or go back to the home page.",
+  "tryAgain": "Try again",
+  "notFoundTitle": "Page not found",
+  "notFoundDescription": "The page you are looking for doesn't exist or has been moved.",
+  "goBack": "Go back",
+  "goHome": "Go home"
 }

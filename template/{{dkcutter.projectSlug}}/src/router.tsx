@@ -8,6 +8,8 @@ import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 {%- if dkcutter.useTanstackQuery %}
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 {%- endif %}
+import { DefaultCatchBoundary } from "./components/default-catch-boundary";
+import { NotFound } from "./components/not-found";
 {%- if dkcutter.useParaglideJs %}
 import { deLocalizeUrl, localizeUrl } from "./paraglide/runtime";
 {%- endif %}
@@ -30,6 +32,8 @@ export function getRouter() {
     scrollRestoration: true,
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
+    defaultErrorComponent: DefaultCatchBoundary,
+    defaultNotFoundComponent: NotFound,
 {%- if dkcutter.useParaglideJs %}
     rewrite: {
       input: ({ url }) => deLocalizeUrl(url),
