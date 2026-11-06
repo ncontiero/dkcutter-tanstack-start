@@ -21,7 +21,7 @@ bun run generate           # dkcutter . — generate a project interactively fro
 bun run generate -o /tmp/out --authProvider clerk --additionalTools prisma -y   # non-interactive
 ```
 
-Run a subset of tests with vitest's name filter, e.g. `bunx vitest run -t "authprovider-clerk"` (test names are built from the combination: `key-value_key-value`, lowercased, commas → `_`). Generated test projects go to `.test/` and are removed after the run.
+Run a subset of tests with vitest's name filter, e.g. `bunx vitest run -t "authprovider-clerk"` (test names are built from the combination: `key-value_key-value`, lowercased, commas → `_`). Generated test projects go to `<os tmpdir>/dkcutter-tanstack-start-test/` and are removed after the run. Keep them outside the repo: inside a git-ignored folder with no `.git` of their own, Tailwind's automatic source detection makes builds take minutes.
 
 Commits must follow Conventional Commits (commitlint runs on `commit-msg` and on PRs in CI).
 

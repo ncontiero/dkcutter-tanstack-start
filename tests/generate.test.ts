@@ -1,3 +1,4 @@
+import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { emptyDir, remove } from "dkcutter/utils";
 import { x } from "tinyexec";
@@ -14,7 +15,12 @@ import {
   constructArgs,
 } from "./utils";
 
-const TEST_OUTPUT = resolve(".test");
+const ROOT_DIR = resolve(".");
+// Generate outside the repository: inside it, the generated projects live in a
+// git-ignored folder with no `.git` of their own, which makes Tailwind's
+// automatic source detection scan far too many files (builds go from seconds
+// to minutes).
+const TEST_OUTPUT = resolve(tmpdir(), "dkcutter-tanstack-start-test");
 
 const isWindows = process.platform === "win32";
 const TIMEOUT = isWindows ? 300_000 : 150_000;
@@ -49,7 +55,7 @@ function runProjectTest(combination: Combination) {
 
       // Generate the project
       await x("bun", ["run", "generate", "-o", TEST_OUTPUT, ...args, "-y"], {
-        nodeOptions: { cwd: TEST_OUTPUT },
+        nodeOptions: { cwd: ROOT_DIR },
       });
 
       // Check that the project was generated
@@ -104,7 +110,7 @@ function runUnsupportedOptionsTest(
       const { exitCode } = await x(
         "bun",
         ["run", "generate", "-o", TEST_OUTPUT, ...args, "-y"],
-        { nodeOptions: { cwd: TEST_OUTPUT } },
+        { nodeOptions: { cwd: ROOT_DIR } },
       );
       expect(exitCode).toBe(1);
       if (exitCode !== 1) return;
