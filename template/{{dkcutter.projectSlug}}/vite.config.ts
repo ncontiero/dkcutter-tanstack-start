@@ -97,7 +97,7 @@ const config = defineConfig({
 {%- if dkcutter.deployHost == "vercel" %}
     vercel: {
       functions: {
-        runtime: "bun1.x",
+        runtime: "bun1.4.x",
       },
     },
 {%- else %}
