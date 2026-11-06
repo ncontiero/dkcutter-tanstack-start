@@ -30,6 +30,7 @@ export const SUPPORTED_COMBINATIONS = [
   { deployHost: "netlify", additionalTools: "reactCompiler" },
   { deployHost: "nitro", additionalTools: "reactCompiler" },
   { authProvider: "clerk", additionalTools: "sentry,paraglideJs" },
+  { deployHost: "cloudflare", additionalTools: "paraglideJs" },
   {
     deployHost: "cloudflare",
     additionalTools: "reactCompiler",

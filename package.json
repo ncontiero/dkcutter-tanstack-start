@@ -22,6 +22,7 @@
     "@clack/prompts": "1.8.1",
     "@commitlint/cli": "21.2.4",
     "@commitlint/config-conventional": "21.2.4",
+    "@inlang/paraglide-js": "2.29.3",
     "@ncontiero/eslint-config": "8.6.2",
     "@tailwindcss/typography": "0.5.20",
     "@tanstack/eslint-plugin-query": "5.105.3",

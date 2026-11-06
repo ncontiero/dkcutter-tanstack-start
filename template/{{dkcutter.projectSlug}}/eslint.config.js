@@ -1,3 +1,6 @@
+{% if dkcutter.useParaglideJs -%}
+import paraglide from "@inlang/paraglide-js/eslint";
+{% endif -%}
 import { ncontiero } from "@ncontiero/eslint-config";
 
 export default ncontiero({
@@ -6,7 +9,7 @@ export default ncontiero({
     "project.inlang/README.md",
     "src/paraglide/**",
     "src/routeTree.gen.ts",
-{%- if dkcuttter.useCloudflare %}
+{%- if dkcutter.useCloudflare %}
     "worker-configuration.d.ts",
 {%- endif %}
   ],
@@ -32,4 +35,11 @@ export default ncontiero({
       ],
     },
   },
+{%- if dkcutter.useParaglideJs %}
+  plugins: { paraglide },
+  rules: {
+    // Dynamic access to the message catalog (e.g. `m[key]`) bundles every message.
+    "paraglide/no-dynamic-message-access": "error",
+  },
+{%- endif %}
 });
