@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "{{ dkcutter.projectSlug|replace('@', '')|replace('_', '-') }}",
-  "compatibility_date": "2026-11-02",
+  "compatibility_date": "2026-11-03",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry"
 }
