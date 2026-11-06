@@ -6,13 +6,13 @@ const sentryDsn =
 Sentry.init({
   dsn: sentryDsn,
   dataCollection: {
-    // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
+    // By default, the SDK sends user data, cookies, HTTP headers and bodies (values with
+    // sensitive-looking keys are filtered). To send less, uncomment the lines below. For more info visit:
     // https://docs.sentry.io/platforms/javascript/guides/tanstackstart-react/configuration/options/#dataCollection
     // userInfo: false,
+    // cookies: false,
     // httpBodies: [],
   },
-  // Enable logs to be sent to Sentry
-  enableLogs: true,
   // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
   // We recommend adjusting this value in production
   // Learn more at
