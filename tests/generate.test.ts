@@ -1,4 +1,3 @@
-import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { emptyDir, remove } from "dkcutter/utils";
 import { x } from "tinyexec";
@@ -15,12 +14,9 @@ import {
   constructArgs,
 } from "./utils";
 
-const ROOT_DIR = resolve(".");
-// Generate outside the repository: inside it, the generated projects live in a
-// git-ignored folder with no `.git` of their own, which makes Tailwind's
-// automatic source detection scan far too many files (builds go from seconds
-// to minutes).
-const TEST_OUTPUT = resolve(tmpdir(), "dkcutter-tanstack-start-test");
+// Keep the output inside the repository: without installed dependencies, the
+// generated projects' lint resolves its packages from the root `node_modules`.
+const TEST_OUTPUT = resolve(".test");
 
 const isWindows = process.platform === "win32";
 const TIMEOUT = isWindows ? 300_000 : 150_000;
@@ -55,7 +51,7 @@ function runProjectTest(combination: Combination) {
 
       // Generate the project
       await x("bun", ["run", "generate", "-o", TEST_OUTPUT, ...args, "-y"], {
-        nodeOptions: { cwd: ROOT_DIR },
+        nodeOptions: { cwd: TEST_OUTPUT },
       });
 
       // Check that the project was generated
@@ -63,6 +59,15 @@ function runProjectTest(combination: Combination) {
       await checkPaths(paths);
 
       if (runTypeCheck) {
+        // Give the project its own git repository, as a real generation does
+        // by default. Inside the git-ignored `.test/` folder without one,
+        // Tailwind's automatic source detection scans far too many files and
+        // builds take minutes instead of seconds.
+        await x("git", ["init", "--quiet"], {
+          nodeOptions: { cwd: target },
+          throwOnError: true,
+        });
+
         // Install dependencies
         await x("bun", ["install"], {
           nodeOptions: { cwd: target },
@@ -110,7 +115,7 @@ function runUnsupportedOptionsTest(
       const { exitCode } = await x(
         "bun",
         ["run", "generate", "-o", TEST_OUTPUT, ...args, "-y"],
-        { nodeOptions: { cwd: ROOT_DIR } },
+        { nodeOptions: { cwd: TEST_OUTPUT } },
       );
       expect(exitCode).toBe(1);
       if (exitCode !== 1) return;
