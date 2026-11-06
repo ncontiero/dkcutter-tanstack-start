@@ -1,4 +1,7 @@
 import { useEffect } from "react";
+{%- if dkcutter.useSentry %}
+import * as Sentry from "@sentry/tanstackstart-react";
+{%- endif %}
 import {
   type ErrorComponentProps,
   Link,
@@ -13,7 +16,13 @@ export function DefaultCatchBoundary({ error, reset }: ErrorComponentProps) {
   const router = useRouter();
 
   useEffect(() => {
+{%- if dkcutter.useSentry %}
+    // Errors handled by route error components never reach the server entry,
+    // so report them here (render errors would otherwise go unreported).
+    Sentry.captureException(error);
+{%- else %}
     console.error(error);
+{%- endif %}
   }, [error]);
 
   return (
