@@ -245,10 +245,10 @@ This project uses Nitro as a generic server adapter, so it can run on any Node-c
 
 ```bash
 {{ dkcutter.pkgManager }} run build
-{{ 'bun run' if dkcutter.useBunRuntime else 'node' }} output/server/index.mjs
+{{ 'bun run' if dkcutter.useBunRuntime else 'node' }}{{ ' --import ./.output/server/instrument.server.mjs' if dkcutter.useSentry }} .output/server/index.mjs
 ```
 
-The build output is a self-contained Node server. To deploy, push the `output/` directory to your host (Render, Fly.io, your own VPS, etc.) and run the server command above.
+The build output is a self-contained {{ 'Bun' if dkcutter.useBunRuntime else 'Node' }} server. To deploy, push the `.output/` directory to your host (Render, Fly.io, your own VPS, etc.) and run the server command above.
 
 For host-specific presets (Vercel, Netlify, Cloudflare, AWS Lambda, etc.) and tuning, see <https://nitro.build/deploy>.
 {%- elif dkcutter.deployHost == "vercel" %}
