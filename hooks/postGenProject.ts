@@ -96,18 +96,19 @@ async function main() {
   const npmrcFiles = ".npmrc";
   const yarnFiles = ".yarnrc.yml";
   const pnpmFiles = "pnpm-workspace.yaml";
+  const bunFiles = "bunfig.toml";
   switch (CTX.pkgManager) {
     case "npm":
-      FILES_TO_REMOVE.push(yarnFiles, pnpmFiles);
+      FILES_TO_REMOVE.push(yarnFiles, pnpmFiles, bunFiles);
       break;
     case "bun":
       FILES_TO_REMOVE.push(npmrcFiles, yarnFiles, pnpmFiles);
       break;
     case "yarn":
-      FILES_TO_REMOVE.push(npmrcFiles, pnpmFiles);
+      FILES_TO_REMOVE.push(npmrcFiles, pnpmFiles, bunFiles);
       break;
     case "pnpm":
-      FILES_TO_REMOVE.push(npmrcFiles, yarnFiles);
+      FILES_TO_REMOVE.push(npmrcFiles, yarnFiles, bunFiles);
       break;
   }
 
