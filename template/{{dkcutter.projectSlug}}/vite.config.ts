@@ -46,6 +46,7 @@ const config = defineConfig({
       outputStructure: "message-modules",
       cookieName: "PARAGLIDE_LOCALE",
       strategy: ["url", "cookie", "preferredLanguage", "baseLocale"],
+      lazyUrlPatternPolyfill: true,
       urlPatterns: [
         {
           pattern: "/:path(.*)?",
