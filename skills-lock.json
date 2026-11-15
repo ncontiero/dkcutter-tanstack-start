@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "skills": {
+    "dkcutter": {
+      "source": "ncontiero/dkcutter",
+      "sourceType": "github",
+      "skillPath": "skills/dkcutter/SKILL.md",
+      "computedHash": "2ebfbe27be8c5046dbcd55afb891bb9bf30082d1827d9140243f2c10e2123784"
+    }
+  }
+}
