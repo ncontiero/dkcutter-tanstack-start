@@ -140,6 +140,12 @@ vite.config.ts.timestamp-*
 # Tanstack
 .tanstack
 
+# Deploy targets
+.nitro
+.vercel
+.netlify
+.wrangler
+
 {%- if dkcutter.usePrisma %}
 
 # Prisma
