@@ -198,10 +198,22 @@ async function main() {
   }
 
   if (CTX.useSentry) {
-    const prodOut =
-      CTX.useNitro || CTX.useCloudflare ? ".output/server" : "dist";
-    SCRIPTS.build = `dotenv -e .env.local -- ${SCRIPTS.build} && shx cp instrument.server.mjs ${prodOut}`;
-    SCRIPTS.dev = `dotenv -e .env.local -- cross-env NODE_OPTIONS="--import ./instrument.server.mjs" ${SCRIPTS.dev}`;
+    // Serverless hosts can't preload `instrument.server.mjs` with `--import`:
+    // Workers initialize Sentry in `src/worker.ts`, Vercel and Netlify import it in `src/server.ts`.
+    const preloadInstrument =
+      !CTX.useCloudflare && !CTX.useNetlify && CTX.deployHost !== "vercel";
+    SCRIPTS.build = `dotenv -e .env.local -- ${SCRIPTS.build}`;
+    SCRIPTS.dev = `dotenv -e .env.local -- ${preloadInstrument ? 'cross-env NODE_OPTIONS="--import ./instrument.server.mjs" ' : ""}${SCRIPTS.dev}`;
+    SCRIPTS.preview = `dotenv -e .env.local -- ${SCRIPTS.preview}`;
+    if (preloadInstrument) {
+      const prodOut = CTX.useNitro ? ".output/server" : "dist";
+      SCRIPTS.build = `${SCRIPTS.build} && shx cp instrument.server.mjs ${prodOut}`;
+    } else {
+      REMOVE_DEV_DEPS.push("cross-env", "shx");
+    }
+    if (CTX.useCloudflare) {
+      FILES_TO_REMOVE.push(path.join(projectDir, "instrument.server.mjs"));
+    }
   } else {
     REMOVE_DEPS.push("@sentry/tanstackstart-react");
     REMOVE_DEV_DEPS.push("cross-env", "shx");
@@ -210,6 +222,11 @@ async function main() {
       path.join(srcFolder, "instrument.client.ts"),
       path.join(projectDir, "instrument.server.mjs"),
     );
+  }
+
+  if (!CTX.useSentry || !CTX.useCloudflare) {
+    REMOVE_DEPS.push("@sentry/cloudflare");
+    FILES_TO_REMOVE.push(path.join(srcFolder, "worker.ts"));
   }
 
   if (CTX.authProvider !== "clerk" && !CTX.useSentry) {

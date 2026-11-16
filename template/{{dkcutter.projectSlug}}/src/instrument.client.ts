@@ -3,6 +3,8 @@ import { env } from "./env";
 
 Sentry.init({
   dsn: env.VITE_SENTRY_DSN,
+  // Send events through the app's own origin (answered in `src/server.ts`), so ad-blockers don't drop them.
+  tunnel: true,
   dataCollection: {
     // By default, the SDK sends user data, cookies, HTTP headers and bodies (values with
     // sensitive-looking keys are filtered). To send less, uncomment the lines below. For more info visit:

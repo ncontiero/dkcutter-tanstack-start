@@ -4,14 +4,14 @@ import { cloudflare } from "@cloudflare/vite-plugin";
 {% if dkcutter.useParaglideJs -%}
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 {% endif -%}
-{% if dkcutter.useSentry -%}
-import { sentryTanstackStart } from "@sentry/tanstackstart-react/vite";
-{% endif -%}
 {% if dkcutter.deployHost == "netlify" -%}
 import netlify from "@netlify/vite-plugin-tanstack-start";
 {% endif -%}
 {% if dkcutter.useReactCompiler -%}
 import babel from "@rolldown/plugin-babel";
+{% endif -%}
+{% if dkcutter.useSentry -%}
+import { sentryTanstackStart } from "@sentry/tanstackstart-react/vite";
 {% endif -%}
 import tailwindcss from "@tailwindcss/vite";
 import { devtools } from "@tanstack/devtools-vite";
@@ -86,7 +86,6 @@ const config = defineConfig({
       org: env.VITE_SENTRY_ORG,
       project: env.VITE_SENTRY_PROJECT,
       authToken: env.SENTRY_AUTH_TOKEN,
-      tunnelRoute: { allowedDsns: [env.VITE_SENTRY_DSN] },
     }),
 {%- endif %}
   ],

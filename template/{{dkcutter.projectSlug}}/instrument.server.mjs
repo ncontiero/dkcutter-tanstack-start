@@ -13,6 +13,9 @@ Sentry.init({
     // cookies: false,
     // httpBodies: [],
   },
+  // Tunnel requests are answered in `src/server.ts`, which runs on every deploy target.
+  // The integration keeps them out of your traces.
+  integrations: [Sentry.serveTunnelIntegration({ intercept: false })],
   // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
   // We recommend adjusting this value in production
   // Learn more at
