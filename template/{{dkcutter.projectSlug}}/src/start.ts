@@ -7,16 +7,26 @@ import {
   sentryGlobalRequestMiddleware,
 } from "@sentry/tanstackstart-react";
 {% endif -%}
-import { createStart } from "@tanstack/react-start";
+import { createCsrfMiddleware, createStart } from "@tanstack/react-start";
+
+// A custom `src/start.ts` disables Start's automatic CSRF protection for server functions,
+// so it must be added explicitly. See https://tanstack.com/start/latest/docs/framework/react/guide/middleware#csrf-middleware
+const csrfMiddleware = createCsrfMiddleware({
+  filter: (context) => context.handlerType === "serverFn",
+});
 
 export const startInstance = createStart(() => {
   return {
 {%- if dkcutter.useSentry and dkcutter.authProvider == "clerk" %}
-    requestMiddleware: [sentryGlobalRequestMiddleware, clerkMiddleware()],
+    requestMiddleware: [
+      sentryGlobalRequestMiddleware,
+      csrfMiddleware,
+      clerkMiddleware(),
+    ],
 {%- elif dkcutter.useSentry %}
-    requestMiddleware: [sentryGlobalRequestMiddleware],
-{%- elif dkcutter.authProvider == "clerk" %}
-    requestMiddleware: [clerkMiddleware()],
+    requestMiddleware: [sentryGlobalRequestMiddleware, csrfMiddleware],
+{%- else %}
+    requestMiddleware: [csrfMiddleware, clerkMiddleware()],
 {%- endif %}
 {%- if dkcutter.useSentry %}
     functionMiddleware: [sentryGlobalFunctionMiddleware],
