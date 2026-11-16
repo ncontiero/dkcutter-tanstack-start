@@ -249,6 +249,17 @@ This project uses Nitro as a generic server adapter, so it can run on any Node-c
 ```
 
 The build output is a self-contained {{ 'Bun' if dkcutter.useBunRuntime else 'Node' }} server. To deploy, push the `.output/` directory to your host (Render, Fly.io, your own VPS, etc.) and run the server command above.
+{%- if dkcutter.useSentry %}
+
+> [!IMPORTANT]
+> Sentry is the exception: `instrument.server.mjs` is preloaded with `--import` from outside the bundle, so it imports `@sentry/tanstackstart-react` from `node_modules`, which `.output/` doesn't include. Without it, the server fails to start with `Cannot find package '@sentry/tanstackstart-react'`. Ship `package.json` and the lockfile with `.output/` and install the production dependencies next to them on your host:
+>
+> ```bash
+> {{ {'npm': 'npm ci --omit=dev --ignore-scripts', 'pnpm': 'pnpm install --prod --ignore-scripts', 'yarn': 'YARN_ENABLE_SCRIPTS=false yarn workspaces focus --production', 'bun': 'bun install --production --ignore-scripts'}[dkcutter.pkgManager] }}
+> ```
+>
+> Skipping the install scripts is required: `postinstall` runs build-time tools (route and type generation) that are dev dependencies.
+{%- endif %}
 
 For host-specific presets (Vercel, Netlify, Cloudflare, AWS Lambda, etc.) and tuning, see <https://nitro.build/deploy>.
 {%- elif dkcutter.deployHost == "vercel" %}
