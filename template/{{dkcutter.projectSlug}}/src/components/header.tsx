@@ -1,9 +1,16 @@
+import type { Theme } from "./theme-provider/context";
 import { Link } from "@tanstack/react-router";
-import { Moon, Sun } from "lucide-react";
+import { Monitor, Moon, Sun } from "lucide-react";
 {%- if dkcutter.useParaglideJs %}
 import { m } from "@/paraglide/messages";
 {%- endif %}
 import { useTheme } from "./theme-provider/hooks";
+
+const NEXT_THEME: Record<Theme, Theme> = {
+  light: "dark",
+  dark: "system",
+  system: "light",
+};
 
 export function Header() {
   const { setTheme, theme } = useTheme();
@@ -40,7 +47,7 @@ export function Header() {
         <div className="flex items-center gap-4">
           <button
             type="button"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            onClick={() => setTheme(NEXT_THEME[theme])}
             className="
               inline-flex size-9 items-center justify-center rounded-md border bg-background text-muted-foreground shadow-sm
               transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring
@@ -52,11 +59,10 @@ export function Header() {
             aria-label="Toggle theme"
 {%- endif %}
           >
-            {theme === "light" ? (
-              <Moon className="size-4.5" />
-            ) : (
-              <Sun className="size-4.5" />
-            )}
+            {/* Picked by the `data-theme` the theme script sets, so the icon is right before hydration */}
+            <Sun className="hidden size-4.5 in-data-[theme=light]:block" />
+            <Moon className="hidden size-4.5 in-data-[theme=dark]:block" />
+            <Monitor className="size-4.5 in-data-[theme=dark]:hidden in-data-[theme=light]:hidden" />
           </button>
         </div>
       </div>
