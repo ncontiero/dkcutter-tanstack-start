@@ -1,7 +1,11 @@
 import type { Theme } from "./theme-provider/context";
 import { Link } from "@tanstack/react-router";
 import { Monitor, Moon, Sun } from "lucide-react";
+{%- if dkcutter.authProvider != "none" %}
+import { HeaderUser } from "@/components/auth/header-user";
+{%- endif %}
 {%- if dkcutter.useParaglideJs %}
+import { LocaleSwitcher } from "@/components/locale-switcher";
 import { m } from "@/paraglide/messages";
 {%- endif %}
 import { useTheme } from "./theme-provider/hooks";
@@ -44,7 +48,10 @@ export function Header() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+{%- if dkcutter.useParaglideJs %}
+          <LocaleSwitcher />
+{%- endif %}
           <button
             type="button"
             onClick={() => setTheme(NEXT_THEME[theme])}
@@ -64,6 +71,9 @@ export function Header() {
             <Moon className="hidden size-4.5 in-data-[theme=dark]:block" />
             <Monitor className="size-4.5 in-data-[theme=dark]:hidden in-data-[theme=light]:hidden" />
           </button>
+{%- if dkcutter.authProvider != "none" %}
+          <HeaderUser />
+{%- endif %}
         </div>
       </div>
     </header>

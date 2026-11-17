@@ -35,6 +35,14 @@ export const SUPPORTED_COMBINATIONS = [
   { deployHost: "cloudflare", additionalTools: "sentry,paraglideJs" },
   { deployHost: "vercel", additionalTools: "sentry,paraglideJs" },
   { deployHost: "netlify", additionalTools: "sentry" },
+  { authProvider: "betterAuth", additionalTools: "reactHookForm" },
+  { authProvider: "betterAuth", additionalTools: "shadcn" },
+  { authProvider: "betterAuth", additionalTools: "reactHookForm,paraglideJs" },
+  {
+    authProvider: "betterAuth",
+    additionalTools: "prisma,shadcn,reactHookForm,paraglideJs",
+  },
+  { authProvider: "clerk", additionalTools: "shadcn" },
   {
     deployHost: "cloudflare",
     additionalTools: "reactCompiler",

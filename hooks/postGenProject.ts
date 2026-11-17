@@ -112,6 +112,7 @@ async function main() {
       break;
   }
 
+  const authComponentsFolder = path.join(srcFolder, "components", "auth");
   const removeClerk = () => {
     REMOVE_DEPS.push("@clerk/tanstack-react-start");
   };
@@ -120,6 +121,9 @@ async function main() {
     FILES_TO_REMOVE.push(
       path.join(libFolder, "auth"),
       path.join(routesFolder, "api"),
+      path.join(routesFolder, "sign-in.tsx"),
+      path.join(routesFolder, "sign-up.tsx"),
+      path.join(authComponentsFolder, "auth-form.tsx"),
     );
   };
 
@@ -130,6 +134,7 @@ async function main() {
   } else {
     removeBetterAuth();
     removeClerk();
+    FILES_TO_REMOVE.push(authComponentsFolder);
   }
 
   if (!CTX.useHusky && !CTX.useLintStaged && !CTX.useNanoStaged) {
@@ -193,6 +198,7 @@ async function main() {
     FILES_TO_REMOVE.push(
       path.join(projectDir, "messages"),
       path.join(projectDir, "project.inlang"),
+      path.join(srcFolder, "components", "locale-switcher.tsx"),
     );
     delete SCRIPTS["paraglide:compile"];
   }
@@ -299,6 +305,7 @@ async function main() {
     FILES_TO_REMOVE.push(
       path.join(projectDir, "components.json"),
       path.join(libFolder, "utils.ts"),
+      path.join(srcFolder, "components", "ui"),
     );
   }
 

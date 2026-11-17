@@ -2,6 +2,28 @@
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "headerNavHome": "Home",
   "headerThemeToggle": "Toggle theme",
+  "localeSwitcherLabel": "Language",
+{%- if dkcutter.authProvider != "none" %}
+  "authSignIn": "Sign in",
+{%- endif %}
+{%- if dkcutter.authProvider == "betterAuth" %}
+  "authSignUp": "Sign up",
+  "authSignOut": "Sign out",
+  "authSignInDescription": "Welcome back! Sign in to your account.",
+  "authSignUpTitle": "Create an account",
+  "authSignUpDescription": "Enter your details to get started.",
+  "authName": "Name",
+  "authEmail": "Email",
+  "authPassword": "Password",
+  "authNoAccount": "Don't have an account?",
+  "authHasAccount": "Already have an account?",
+  "authError": "Something went wrong. Try again.",
+{%- if dkcutter.useReactHookForm %}
+  "authNameRequired": "Enter your name",
+  "authEmailInvalid": "Enter a valid email",
+  "authPasswordMin": "Use at least 8 characters",
+{%- endif %}
+{%- endif %}
   "poweredBy": "Powered by DKCutter & TanStack Start",
   "welcomeTitle": "Welcome to {% raw %}{#br/}{#span}{% endraw %}{{ dkcutter.projectName }}{/span}",
   "getStarted": "Get Started",

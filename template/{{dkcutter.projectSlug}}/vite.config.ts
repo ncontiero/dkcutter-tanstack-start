@@ -52,6 +52,7 @@ const config = defineConfig({
           pattern: "/:path(.*)?",
           localized: [
             ["en", "/en/:path(.*)?"],
+            ["pt-BR", "/pt-br/:path(.*)?"],
             // Add your locales here
           ],
         },

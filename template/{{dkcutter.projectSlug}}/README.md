@@ -18,7 +18,7 @@
 - **Form Validation**: Type-safe and performant forms via React Hook Form and Zod.
 {%- endif %}
 {%- if dkcutter.useParaglideJs %}
-- **Internationalization**: Fully type-safe i18n via Paraglide JS.
+- **Internationalization**: Fully type-safe i18n via Paraglide JS, with English and Portuguese (`messages/`) and a language switcher in the header.
 {%- endif %}
 {%- if dkcutter.useSentry %}
 - **Monitoring**: Application monitoring and error tracking via Sentry.
@@ -32,7 +32,7 @@
 - **Typography**: Beautiful typographic defaults for HTML using the Tailwind CSS Typography plugin.
 {%- endif %}
 {%- if dkcutter.authProvider != "none" %}
-- **Authentication**: Pre-configured with {{ "Better Auth" if dkcutter.authProvider == "betterAuth" else dkcutter.authProvider|title }}.
+- **Authentication**: Pre-configured with {{ "Better Auth, including sign-in and sign-up pages (`/sign-in`, `/sign-up`)" if dkcutter.authProvider == "betterAuth" else "Clerk, with its sign-in and user buttons in the header" }}.
 {%- endif %}
 {%- if dkcutter.usePrisma %}
 - **Database ORM**: Prisma configured for type-safe database access, with a seed script (`prisma/seed.ts`, run with `{{ dkcutter.pkgManager }} run db:seed`).

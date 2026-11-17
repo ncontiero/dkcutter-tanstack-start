@@ -1,0 +1,41 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "headerNavHome": "Início",
+  "headerThemeToggle": "Alternar tema",
+  "localeSwitcherLabel": "Idioma",
+{%- if dkcutter.authProvider != "none" %}
+  "authSignIn": "Entrar",
+{%- endif %}
+{%- if dkcutter.authProvider == "betterAuth" %}
+  "authSignUp": "Cadastrar",
+  "authSignOut": "Sair",
+  "authSignInDescription": "Bem-vindo de volta! Entre na sua conta.",
+  "authSignUpTitle": "Crie uma conta",
+  "authSignUpDescription": "Informe seus dados para começar.",
+  "authName": "Nome",
+  "authEmail": "E-mail",
+  "authPassword": "Senha",
+  "authNoAccount": "Não tem uma conta?",
+  "authHasAccount": "Já tem uma conta?",
+  "authError": "Algo deu errado. Tente novamente.",
+{%- if dkcutter.useReactHookForm %}
+  "authNameRequired": "Informe seu nome",
+  "authEmailInvalid": "Informe um e-mail válido",
+  "authPasswordMin": "Use pelo menos 8 caracteres",
+{%- endif %}
+{%- endif %}
+  "poweredBy": "Feito com DKCutter & TanStack Start",
+  "welcomeTitle": "Bem-vindo ao {% raw %}{#br/}{#span}{% endraw %}{{ dkcutter.projectName }}{/span}",
+  "getStarted": "Comece agora",
+  "startEditing": "Comece a construir sua aplicação editando {% raw %}{#code}{% endraw %}src/routes/index.tsx{/code}.",
+  "documentation": "Documentação",
+  "learnMore": "Aprenda a buscar dados, lidar com mutações e construir sua aplicação full-stack com o TanStack Start.",
+  "readDocs": "Ler a documentação",
+  "errorTitle": "Algo deu errado",
+  "errorDescription": "Ocorreu um erro inesperado. Tente novamente ou volte para a página inicial.",
+  "tryAgain": "Tentar novamente",
+  "notFoundTitle": "Página não encontrada",
+  "notFoundDescription": "A página que você procura não existe ou foi movida.",
+  "goBack": "Voltar",
+  "goHome": "Ir para o início"
+}
