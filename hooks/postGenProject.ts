@@ -240,7 +240,12 @@ async function main() {
     const dbGenerate = `${CTX.pkgManager} run db:generate`;
     SCRIPTS.build = `${dbGenerate} && ${SCRIPTS.build}`;
     SCRIPTS.postinstall = `${SCRIPTS.postinstall} && ${dbGenerate}`;
-  } else {
+  }
+  // Bun runs the TypeScript seed script itself (see `prisma.config.ts`).
+  if (!CTX.usePrisma || CTX.pkgManager === "bun") {
+    REMOVE_DEV_DEPS.push("tsx");
+  }
+  if (!CTX.usePrisma) {
     REMOVE_DEPS.push(
       "@better-auth/prisma-adapter",
       "@prisma/adapter-pg",

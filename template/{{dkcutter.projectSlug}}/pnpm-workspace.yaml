@@ -8,7 +8,7 @@ allowBuilds:
 {%- if dkcutter.usePrisma %}
   "@prisma/engines": true
 {%- endif %}
-{%- if dkcutter.useTriggerDev %}
+{%- if dkcutter.useTriggerDev or dkcutter.usePrisma %}
   esbuild: true
 {%- endif %}
 {%- if dkcutter.usePrisma %}

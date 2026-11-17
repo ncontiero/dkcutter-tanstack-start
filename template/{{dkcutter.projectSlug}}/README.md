@@ -35,7 +35,7 @@
 - **Authentication**: Pre-configured with {{ "Better Auth" if dkcutter.authProvider == "betterAuth" else dkcutter.authProvider|title }}.
 {%- endif %}
 {%- if dkcutter.usePrisma %}
-- **Database ORM**: Prisma configured for type-safe database access.
+- **Database ORM**: Prisma configured for type-safe database access, with a seed script (`prisma/seed.ts`, run with `{{ dkcutter.pkgManager }} run db:seed`).
 {%- if dkcutter.useDockerCompose %}
 - **Local Database**: Docker Compose configured for an easy local database setup.
 {%- endif %}
