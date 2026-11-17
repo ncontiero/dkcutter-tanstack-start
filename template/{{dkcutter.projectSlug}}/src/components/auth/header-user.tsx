@@ -48,10 +48,6 @@ import { authClient } from "@/lib/auth/client";
 import { m } from "@/paraglide/messages";
 {%- endif %}
 
-// The sign-in link is a styled `<Link>`, not a `<Button>`: it navigates, so it keeps the link role.
-const outlineClassName =
-  "inline-flex h-9 items-center justify-center rounded-md border bg-background px-3 text-sm font-medium shadow-sm transition-colors hover:bg-muted";
-
 export function HeaderUser() {
   const { data: session, isPending } = authClient.useSession();
 
@@ -60,8 +56,15 @@ export function HeaderUser() {
   }
 
   if (!session) {
+    // A styled link, not a `<Button>`: it navigates, so it keeps the link role.
     return (
-      <Link to="/sign-in" className={outlineClassName}>
+      <Link
+        to="/sign-in"
+        className="
+          inline-flex h-9 items-center justify-center rounded-md border bg-background px-3 text-sm font-medium shadow-sm
+          transition-colors hover:bg-muted
+        "
+      >
         {{ text(i18n, "authSignIn", "Sign in") }}
       </Link>
     );
@@ -80,7 +83,10 @@ export function HeaderUser() {
       <button
         type="button"
         onClick={{ "{" }}{{ "async " if dkcutter.useEslintWithType }}() => authClient.signOut(){{ "}" }}
-        className={outlineClassName}
+        className="
+          inline-flex h-9 items-center justify-center rounded-md border bg-background px-3 text-sm font-medium shadow-sm
+          transition-colors hover:bg-muted
+        "
       >
         {{ text(i18n, "authSignOut", "Sign out") }}
       </button>

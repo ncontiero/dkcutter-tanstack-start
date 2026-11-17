@@ -25,8 +25,8 @@ import { useForm } from "react-hook-form";
 {%- else -%}
 import {
   type ComponentProps,
-  type FormEvent,
   type ReactNode,
+  type SubmitEvent,
   useId,
   useState,
 } from "react";
@@ -257,9 +257,6 @@ function SubmitButton({
   );
 }
 
-const linkClassName =
-  "font-medium text-foreground underline-offset-4 hover:underline";
-
 export function SignInForm() {
   const navigate = useNavigate();
 {%- if rhf %}
@@ -284,7 +281,7 @@ export function SignInForm() {
   const [error, setError] = useState<string>();
   const [isPending, setIsPending] = useState(false);
 
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -310,7 +307,10 @@ export function SignInForm() {
       footer={
         <>
           {{ text(i18n, "authNoAccount", "Don't have an account?") }}{" "}
-          <Link to="/sign-up" className={linkClassName}>
+          <Link
+            to="/sign-up"
+            className="font-medium text-foreground underline-offset-4 hover:underline"
+          >
             {{ text(i18n, "authSignUp", "Sign up") }}
           </Link>
         </>
@@ -411,7 +411,7 @@ export function SignUpForm() {
   const [error, setError] = useState<string>();
   const [isPending, setIsPending] = useState(false);
 
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -438,7 +438,10 @@ export function SignUpForm() {
       footer={
         <>
           {{ text(i18n, "authHasAccount", "Already have an account?") }}{" "}
-          <Link to="/sign-in" className={linkClassName}>
+          <Link
+            to="/sign-in"
+            className="font-medium text-foreground underline-offset-4 hover:underline"
+          >
             {{ text(i18n, "authSignIn", "Sign in") }}
           </Link>
         </>
