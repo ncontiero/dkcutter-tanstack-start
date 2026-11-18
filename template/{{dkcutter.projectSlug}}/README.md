@@ -36,6 +36,10 @@
 {%- endif %}
 {%- if dkcutter.usePrisma %}
 - **Database ORM**: Prisma configured for type-safe database access, with a seed script (`prisma/seed.ts`, run with `{{ dkcutter.pkgManager }} run db:seed`).
+{%- elif dkcutter.useDrizzle %}
+- **Database ORM**: Drizzle configured for type-safe database access (`src/lib/db/`), with a seed script (`src/lib/db/seed.ts`, run with `{{ dkcutter.pkgManager }} run db:seed`).
+{%- endif %}
+{%- if dkcutter.useDatabase %}
 {%- if dkcutter.useDockerCompose %}
 - **Local Database**: Docker Compose configured for an easy local database setup.
 {%- endif %}

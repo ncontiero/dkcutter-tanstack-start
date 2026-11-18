@@ -3,6 +3,7 @@ import type {
   AutomatedDepsUpdater,
   ContextProps,
   DeployHost,
+  Orm,
   PackageManager,
 } from "./utils/types";
 import path from "node:path";
@@ -22,6 +23,7 @@ const CTX: ContextProps = {
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
   authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
+  orm: "{{ dkcutter.orm }}" as Orm,
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
   useNanoStaged: toBoolean("{{ dkcutter.useNanoStaged }}"),
@@ -32,6 +34,8 @@ const CTX: ContextProps = {
   useSentry: toBoolean("{{ dkcutter.useSentry }}"),
   useEslintWithType: toBoolean("{{ dkcutter.useEslintWithType }}"),
   usePrisma: toBoolean("{{ dkcutter.usePrisma }}"),
+  useDrizzle: toBoolean("{{ dkcutter.useDrizzle }}"),
+  useDatabase: toBoolean("{{ dkcutter.useDatabase }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
   useTanstackQuery: toBoolean("{{ dkcutter.useTanstackQuery }}"),
   useShadcn: toBoolean("{{ dkcutter.useShadcn }}"),
@@ -117,7 +121,11 @@ async function main() {
     REMOVE_DEPS.push("@clerk/tanstack-react-start");
   };
   const removeBetterAuth = () => {
-    REMOVE_DEPS.push("@better-auth/prisma-adapter", "better-auth");
+    REMOVE_DEPS.push(
+      "@better-auth/drizzle-adapter",
+      "@better-auth/prisma-adapter",
+      "better-auth",
+    );
     FILES_TO_REMOVE.push(
       path.join(libFolder, "auth"),
       path.join(routesFolder, "api"),
@@ -258,6 +266,27 @@ async function main() {
       path.join(projectDir, "prisma.config.ts"),
       path.join(libFolder, "prisma.ts"),
     );
+  }
+
+  if (CTX.useDrizzle) {
+    // The template's `db:*` scripts are Prisma's: point them at drizzle-kit instead.
+    const seedRunner = CTX.pkgManager === "bun" ? "bun" : "tsx";
+    SCRIPTS["db:generate"] = "dotenv -e .env.local -- drizzle-kit generate";
+    SCRIPTS["db:migrate"] = "dotenv -e .env.local -- drizzle-kit migrate";
+    SCRIPTS["db:push"] = "dotenv -e .env.local -- drizzle-kit push";
+    SCRIPTS["db:studio"] = "dotenv -e .env.local -- drizzle-kit studio";
+    SCRIPTS["db:seed"] =
+      `dotenv -e .env.local -- ${seedRunner} src/lib/db/seed.ts`;
+  } else {
+    REMOVE_DEPS.push("@better-auth/drizzle-adapter", "drizzle-orm", "pg");
+    REMOVE_DEV_DEPS.push("@types/pg", "drizzle-kit");
+    FILES_TO_REMOVE.push(
+      path.join(projectDir, "drizzle.config.ts"),
+      path.join(libFolder, "db"),
+    );
+  }
+
+  if (!CTX.useDatabase) {
     delete SCRIPTS["db:generate"];
     delete SCRIPTS["db:push"];
     delete SCRIPTS["db:migrate"];
@@ -265,12 +294,12 @@ async function main() {
     delete SCRIPTS["db:seed"];
   }
 
-  // Bun runs the TypeScript seed script itself (see `prisma.config.ts`).
-  if (!CTX.usePrisma || CTX.pkgManager === "bun") {
+  // Bun runs the TypeScript seed script itself.
+  if (!CTX.useDatabase || CTX.pkgManager === "bun") {
     REMOVE_DEV_DEPS.push("tsx");
   }
 
-  if (!CTX.useSentry && !CTX.usePrisma) {
+  if (!CTX.useSentry && !CTX.useDatabase) {
     REMOVE_DEV_DEPS.push("dotenv-cli");
   }
 
@@ -317,7 +346,7 @@ async function main() {
     REMOVE_DEPS.push("@unpic/react");
   }
 
-  if (!CTX.usePrisma && CTX.authProvider !== "betterAuth" && !CTX.useShadcn) {
+  if (!CTX.useDatabase && CTX.authProvider !== "betterAuth" && !CTX.useShadcn) {
     FILES_TO_REMOVE.push(libFolder);
   }
 

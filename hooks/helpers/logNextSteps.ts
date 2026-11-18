@@ -10,6 +10,7 @@ export function logNextSteps(ctx: ContextProps, hasGitInitialized: boolean) {
     pkgManager,
     authProvider,
     usePrisma,
+    useDrizzle,
   } = ctx;
   const commands = [`cd ${projectSlug}`];
 
@@ -20,9 +21,15 @@ export function logNextSteps(ctx: ContextProps, hasGitInitialized: boolean) {
     commands.push("git init", "git add .", `git commit -m "initial commit"`);
   }
 
-  if (["betterAuth"].includes(authProvider) && usePrisma) {
+  // Better Auth needs its tables before the first sign-up.
+  if (authProvider === "betterAuth" && usePrisma) {
     commands.push(
       `${pkgManager} run db:migrate ${pkgManager === "npm" ? "-- " : ""}--name init`,
+    );
+  } else if (authProvider === "betterAuth" && useDrizzle) {
+    commands.push(
+      `${pkgManager} run db:generate`,
+      `${pkgManager} run db:migrate`,
     );
   }
   commands.push(`${pkgManager} run dev`);

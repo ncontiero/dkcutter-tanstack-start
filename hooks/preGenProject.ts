@@ -8,7 +8,6 @@
 // {{ dkcutter.add("useParaglideJs", "{{ 'paraglideJs' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useSentry", "{{ 'sentry' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useEslintWithType", "{{ 'eslintTypeInfo' in dkcutter.additionalTools }}") }}
-// {{ dkcutter.add("usePrisma", "{{ 'prisma' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useTriggerDev", "{{ 'triggerDev' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useTanstackQuery", "{{ 'tanstackQuery' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useShadcn", "{{ 'shadcn' in dkcutter.additionalTools }}") }}
@@ -19,3 +18,8 @@
 // {{ dkcutter.add("useNetlify", "{{ dkcutter.deployHost == 'netlify' }}") }}
 // Vercel uses Nitro to deploy.
 // {{ dkcutter.add("useNitro", "{{ dkcutter.deployHost in ['nitro', 'vercel'] }}") }}
+
+// {{ dkcutter.add("usePrisma", "{{ dkcutter.orm == 'prisma' }}") }}
+// {{ dkcutter.add("useDrizzle", "{{ dkcutter.orm == 'drizzle' }}") }}
+// Shared by both ORMs: `DATABASE_URL`, Docker Compose, the `db:*` scripts.
+// {{ dkcutter.add("useDatabase", "{{ dkcutter.orm != 'none' }}") }}

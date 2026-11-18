@@ -17,6 +17,11 @@ This page describes all the template options that will be prompted by the [DKCut
   - [Clerk](https://clerk.com/): Hosted user accounts with prebuilt sign-in UI and social providers.
   - [Better Auth](https://www.better-auth.com/): Self-hosted user accounts and sessions.
 
+- **ORM**: Indicates which ORM the project should use to access a PostgreSQL database:
+  - None
+  - [Prisma](https://www.prisma.io/): Schema-first ORM with generated client, migrations and Prisma Studio.
+  - [Drizzle](https://orm.drizzle.team/): Lightweight TypeScript ORM with a SQL-like query builder and schema in code.
+
 - **Additional Tools**: Select additional tools to use:
   - [Husky](https://typicode.github.io/husky/): Modern native git hooks made easy.
   - [Lint Staged](https://github.com/lint-staged/lint-staged): Run linters against staged git files.
@@ -27,7 +32,6 @@ This page describes all the template options that will be prompted by the [DKCut
   - [Paraglide JS](https://paraglidejs.com): Fully type-safe and framework-agnostic i18n by inlang.
   - [Sentry](https://sentry.io/): Application monitoring and error tracking software.
   - [ESLint + Type Information](https://typescript-eslint.io/getting-started/typed-linting): Enable ESLint rules that require type information.
-  - [Prisma](https://www.prisma.io/): Next-generation ORM for Node.js & TypeScript.
   - [Trigger.dev](https://trigger.dev/): The open source background jobs platform.
   - [Tanstack Query](https://tanstack.com/query/latest): Powerful asynchronous state management for TS/JS.
   - [Shadcn](https://ui.shadcn.com/): Copy-paste accessible UI components (Tailwind + Radix primitives).
@@ -36,7 +40,7 @@ This page describes all the template options that will be prompted by the [DKCut
 
 - **React Server Components**: Indicates whether the project should enable React Server Components (RSC) functionality (Experimental in TanStack Start). [See more](https://tanstack.com/start/latest/docs/framework/react/guide/server-components).
 
-- **Docker Compose**: Indicates whether to add Docker Compose to the project to easily spin up a local database (only prompted if Prisma is selected).
+- **Docker Compose**: Indicates whether to add Docker Compose to the project to easily spin up a local database (only prompted if an ORM is selected).
 
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
   - None

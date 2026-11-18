@@ -10,7 +10,7 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-{%- if dkcutter.usePrisma %}
+{%- if dkcutter.useDatabase %}
     DATABASE_URL: z.url(),
 {%- endif %}
 {%- if dkcutter.useSentry %}

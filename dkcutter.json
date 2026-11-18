@@ -41,6 +41,23 @@
     ],
     "promptMessage": "Which {{ colors.blue('Authentication Provider') }} would you like to use?"
   },
+  "orm": {
+    "value": "none",
+    "choices": [
+      { "title": "None", "value": "none" },
+      {
+        "title": "Prisma",
+        "value": "prisma",
+        "description": "Schema-first ORM with generated client, migrations and Prisma Studio"
+      },
+      {
+        "title": "Drizzle",
+        "value": "drizzle",
+        "description": "Lightweight TypeScript ORM with a SQL-like query builder and schema in code"
+      }
+    ],
+    "promptMessage": "Which {{ colors.blue('ORM') }} would you like to use? (PostgreSQL)"
+  },
   "additionalTools": {
     "value": "none",
     "choices": [
@@ -90,11 +107,6 @@
         "description": "Enable ESLint rules that require type information"
       },
       {
-        "title": "Prisma",
-        "value": "prisma",
-        "description": "Next-generation ORM for Node.js & TypeScript"
-      },
-      {
         "title": "Trigger.dev",
         "value": "triggerDev",
         "description": "The open source background jobs platform"
@@ -129,7 +141,7 @@
   },
   "useDockerCompose": {
     "value": false,
-    "disabled": "{{ 'prisma' not in additionalTools }}",
+    "disabled": "{{ orm == 'none' }}",
     "promptMessage": "Would you like to add {{ colors.blue('Docker Compose') }} for the database?"
   },
   "automatedDepsUpdater": {

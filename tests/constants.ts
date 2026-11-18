@@ -10,7 +10,11 @@ export const SUPPORTED_COMBINATIONS = [
   { additionalTools: "reactCompiler" },
   { additionalTools: "paraglideJs" },
   { additionalTools: "sentry" },
-  { additionalTools: "prisma" },
+  { orm: "prisma" },
+  { orm: "drizzle" },
+  { orm: "drizzle", useDockerCompose: true },
+  { authProvider: "betterAuth", orm: "drizzle" },
+  { deployHost: "cloudflare", orm: "drizzle" },
   { additionalTools: "triggerDev" },
   { additionalTools: "tanstackQuery" },
   { additionalTools: "shadcn" },
@@ -40,7 +44,8 @@ export const SUPPORTED_COMBINATIONS = [
   { authProvider: "betterAuth", additionalTools: "reactHookForm,paraglideJs" },
   {
     authProvider: "betterAuth",
-    additionalTools: "prisma,shadcn,reactHookForm,paraglideJs",
+    orm: "prisma",
+    additionalTools: "shadcn,reactHookForm,paraglideJs",
   },
   { authProvider: "clerk", additionalTools: "shadcn" },
   {
@@ -60,23 +65,30 @@ export const SUPPORTED_COMBINATIONS = [
   },
   { deployHost: "nitro", useBunRuntime: true },
   { deployHost: "vercel", useBunRuntime: true },
-  { authProvider: "clerk", additionalTools: "prisma,tanstackQuery" },
-  { authProvider: "betterAuth", additionalTools: "prisma,tanstackQuery" },
+  { authProvider: "clerk", orm: "prisma", additionalTools: "tanstackQuery" },
+  {
+    authProvider: "betterAuth",
+    orm: "drizzle",
+    additionalTools: "tanstackQuery",
+  },
   {
     authProvider: "clerk",
+    orm: "prisma",
     additionalTools:
-      "husky,lintStaged,nanoStaged,commitlint,prisma,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
+      "husky,lintStaged,nanoStaged,commitlint,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
   },
   {
     authProvider: "betterAuth",
+    orm: "drizzle",
     additionalTools:
-      "husky,lintStaged,nanoStaged,commitlint,reactCompiler,prisma,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
+      "husky,lintStaged,nanoStaged,commitlint,reactCompiler,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
     useServerComponents: true,
   },
 ];
 
 export const UNSUPPORTED_COMBINATIONS = [
   { authProvider: "non" },
+  { orm: "xpto" },
   { automatedDepsUpdater: "xpto" },
 ];
 

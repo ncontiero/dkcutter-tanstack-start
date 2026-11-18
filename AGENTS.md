@@ -18,7 +18,7 @@ bun run test               # vitest: generates every combination in tests/consta
 bun run test:typecheck     # also installs deps, builds (betterAuth only) and typechecks each generated project — slow
 bun run test:strict-eslint # same as test but lint with --max-warnings 0
 bun run generate           # dkcutter . — generate a project interactively from the local template
-bun run generate -o /tmp/out --authProvider clerk --additionalTools prisma -y   # non-interactive
+bun run generate -o /tmp/out --authProvider clerk --orm prisma -y   # non-interactive
 ```
 
 Run a subset of tests with vitest's name filter, e.g. `bunx vitest run -t "authprovider-clerk"` (test names are built from the combination: `key-value_key-value`, lowercased, commas → `_`). Generated test projects go to `.test/` and are removed after the run.
@@ -36,7 +36,7 @@ Generation happens in three layers; changing or adding an option usually touches
 2. **`template/{{dkcutter.projectSlug}}/`** — the generated project. Files are Nunjucks-rendered: use `{{ dkcutter.<key> }}` and `{% if dkcutter.<flag> %}` blocks. The template is a superset: `package.json` lists **all** possible deps/scripts and source files for all features exist; they are pruned afterward. ESLint/TS ignore `template/` at the root level (it isn't valid TS until rendered).
 
 3. **`hooks/`** — TypeScript that runs during generation:
-   - `preGenProject.ts` defines derived boolean context flags via `dkcutter.add(...)` (e.g. `usePrisma`, `useShadcn`, `useCloudflare`, `useNitro` — note `useNitro` is true for both `nitro` and `vercel`). These flags are what templates and `postGenProject.ts` consume.
+   - `preGenProject.ts` defines derived boolean context flags via `dkcutter.add(...)` (e.g. `usePrisma`, `useShadcn`, `useCloudflare`, `useNitro` — note `useNitro` is true for both `nitro` and `vercel`, and `useDatabase` for both ORMs). These flags are what templates and `postGenProject.ts` consume.
    - `postGenProject.ts` runs inside the generated project: reads the `CTX` (itself templated from `{{ dkcutter.* }}` strings), then for each disabled feature pushes to `REMOVE_DEPS` / `REMOVE_DEV_DEPS` / `FILES_TO_REMOVE` and deletes/composes scripts in `SCRIPTS` (e.g. Prisma/Sentry/Paraglide/Trigger.dev wrap `build`, `dev`, `postinstall`). It also removes lockfile config for unused package managers, sets `packageManager`, handles Better Auth secret placeholders in env files, then optionally installs deps and initializes git.
    - `hooks/utils/` holds shared helpers (`updatePackageJson`, `setFlag`, `toBoolean`, etc.).
 

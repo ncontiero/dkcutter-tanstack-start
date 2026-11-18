@@ -24,6 +24,10 @@ updates:
         patterns:
           - "@prisma*"
           - prisma
+      {%- elif dkcutter.useDrizzle %}
+      drizzle:
+        patterns:
+          - "drizzle-*"
       {%- endif %}
       {%- if dkcutter.useCommitlint %}
       commitlint:

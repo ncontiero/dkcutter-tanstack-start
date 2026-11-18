@@ -2,6 +2,7 @@ import type { PackageManager } from "dkcutter/utils";
 
 export type { PackageManager };
 export type AuthProvider = "none" | "clerk" | "betterAuth";
+export type Orm = "none" | "prisma" | "drizzle";
 export type AutomatedDepsUpdater = "none" | "renovate" | "dependabot";
 export type DeployHost = "none" | "cloudflare" | "netlify" | "nitro" | "vercel";
 
@@ -10,6 +11,7 @@ export interface ContextProps {
   projectSlug: string;
   pkgManager: PackageManager;
   authProvider: AuthProvider;
+  orm: Orm;
   useHusky: boolean;
   useLintStaged: boolean;
   useNanoStaged: boolean;
@@ -20,6 +22,8 @@ export interface ContextProps {
   useSentry: boolean;
   useEslintWithType: boolean;
   usePrisma: boolean;
+  useDrizzle: boolean;
+  useDatabase: boolean;
   useTriggerDev: boolean;
   useTanstackQuery: boolean;
   useShadcn: boolean;
