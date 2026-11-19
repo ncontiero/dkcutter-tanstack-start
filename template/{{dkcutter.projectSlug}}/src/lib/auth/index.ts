@@ -20,14 +20,10 @@ export const auth = betterAuth({
 {%- endif %}
   advanced: {
     database: {
-{%- if dkcutter.useDrizzle %}
       // Matches the `uuid` id columns: Postgres generates the ids, and ids Better Auth derives
-      // (single-use records) are formatted as UUIDs. `npx auth generate` also keeps `uuid` columns.
+      // (single-use records) are formatted as UUIDs. `npx auth generate` keeps `uuid` ids for
+      // the tables plugins add.
       generateId: "uuid",
-{%- else %}
-      // The schema defaults (`@default(uuid())`) generate the ids instead of Better Auth.
-      generateId: false,
-{%- endif %}
     },
   },
 {%- endif %}
