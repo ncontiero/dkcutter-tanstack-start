@@ -17,6 +17,7 @@ Powered by [DKCutter](https://dkcutter.ncontiero.com/), DKCutter TanStack Start 
 - 🖼️ **Images**: High-performance, framework-agnostic image component via [Unpic](https://unpic.pics/).
 - 🎨 **Styling**: Pre-configured with **Tailwind CSS** out-of-the-box, with optional support for [Shadcn UI](https://ui.shadcn.com/) components and the [Tailwind CSS Typography](https://github.com/tailwindlabs/tailwindcss-typography) plugin.
 - 🛠️ **Code Quality & Git Hooks**: Enforce standards with Husky, Lint Staged, Nano Staged, Commitlint, and optional type-aware ESLint.
+- 🧠 **AI-Ready**: Generated `AGENTS.md` and `CLAUDE.md` describing the project's stack, commands and conventions for coding agents, plus instructions to enable the libraries' [Agent Skills](https://agentskills.io) with [TanStack Intent](https://tanstack.com/intent/latest).
 - 🤖 **Dependency Automation**: Keep your project up-to-date automatically using Mend Renovate or GitHub Dependabot.
 - 🚀 **Deployment & Runtime**: Pre-configured options for Cloudflare, Netlify, Vercel, or generic Nitro deployment, alongside optional Bun runtime support.
 
