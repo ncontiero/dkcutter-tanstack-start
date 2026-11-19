@@ -125,7 +125,7 @@ The package manager is **{{ pm }}**.
 {%- endif %}
 {%- if dkcutter.authProvider == "betterAuth" and dkcutter.useDatabase %}
 - Better Auth's tables are in the schema with `uuid` ids (`advanced.database.generateId: "uuid"`). When adding a Better Auth plugin, add its tables too and keep `generateId: "uuid"`.
-{%- if dkcutter.usePrisma %} `{{ dlx }} auth@latest generate` adds them to `prisma/schema.prisma`, keeping the existing models.
+{%- if dkcutter.usePrisma %} `{{ dlx }} auth@latest generate` adds them to `prisma/schema.prisma`, keeping the existing models. It writes their id default as `dbgenerated("pg_catalog.gen_random_uuid()")`: change it to `dbgenerated("gen_random_uuid()")`, like the other models. Postgres stores the default without the `pg_catalog.` prefix, so Prisma would otherwise always see a difference between the schema and the database.
 {%- else %} `{{ dlx }} auth@latest generate --output <file>` can write them, but it replaces the whole target file: write to a new file and copy the new tables into `src/lib/db/schema.ts`.
 {%- endif %}
 {%- endif %}
