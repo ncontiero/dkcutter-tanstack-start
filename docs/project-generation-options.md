@@ -22,13 +22,17 @@ This page describes all the template options that will be prompted by the [DKCut
   - [Prisma](https://www.prisma.io/): Schema-first ORM with generated client, migrations and Prisma Studio.
   - [Drizzle](https://orm.drizzle.team/): Lightweight TypeScript ORM with a SQL-like query builder and schema in code.
 
+- **Form Library**: Indicates which library the project should use for forms (validated with [Zod](https://zod.dev/)). With Better Auth, the sign-in and sign-up forms use it:
+  - None
+  - [React Hook Form](https://react-hook-form.com/): Performant, flexible and extensible forms with easy-to-use validation.
+  - [TanStack Form](https://tanstack.com/form/latest): Headless, type-safe form state management, with reusable fields through `useAppForm` (`src/hooks/form.ts`).
+
 - **Additional Tools**: Select additional tools to use:
   - [Husky](https://typicode.github.io/husky/): Modern native git hooks made easy.
   - [Lint Staged](https://github.com/lint-staged/lint-staged): Run linters against staged git files.
   - [Nano Staged](https://github.com/usmanyunusov/nano-staged): Tiny tool to run commands for modified, staged, and committed files.
   - [Commitlint](https://commitlint.js.org/): Lint commit messages.
   - [React Compiler](https://react.dev/learn/react-compiler): Automatically optimize React component renders.
-  - [React Hook Form](https://react-hook-form.com/): Performant, flexible and extensible forms with easy-to-use validation.
   - [Paraglide JS](https://paraglidejs.com): Fully type-safe and framework-agnostic i18n by inlang.
   - [Sentry](https://sentry.io/): Application monitoring and error tracking software.
   - [ESLint + Type Information](https://typescript-eslint.io/getting-started/typed-linting): Enable ESLint rules that require type information.

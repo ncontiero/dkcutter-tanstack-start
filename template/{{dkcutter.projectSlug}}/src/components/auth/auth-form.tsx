@@ -1,5 +1,7 @@
 {%- set i18n = dkcutter.useParaglideJs -%}
 {%- set rhf = dkcutter.useReactHookForm -%}
+{%- set tsf = dkcutter.useTanstackForm -%}
+{%- set validated = rhf or tsf -%}
 {%- set ui = dkcutter.useShadcn -%}
 {%- macro text(on, key, value) -%}
 {%- if on -%}{m.{{ key }}()}{%- else -%}{{ value|safe }}{%- endif -%}
@@ -22,6 +24,8 @@ import {
 {%- elif rhf -%}
 import { type ComponentProps, type ReactNode, useId } from "react";
 import { useForm } from "react-hook-form";
+{%- elif tsf -%}
+import { type ReactNode, useState } from "react";
 {%- else -%}
 import {
   type ComponentProps,
@@ -33,13 +37,17 @@ import {
 {%- endif %}
 {%- if rhf %}
 import { zodResolver } from "@hookform/resolvers/zod";
+{%- elif tsf %}
+import { revalidateLogic } from "@tanstack/react-form";
 {%- endif %}
 import { Link, useNavigate } from "@tanstack/react-router";
-{%- if rhf %}
+{%- if validated %}
 import { z } from "zod";
 {%- endif %}
 {%- if ui %}
+{%- if not tsf %}
 import { Button } from "@/components/ui/button";
+{%- endif %}
 import {
   Card,
   CardContent,
@@ -48,7 +56,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-{%- if rhf %}
+{%- if tsf %}
+import { FieldGroup } from "@/components/ui/field";
+{%- elif rhf %}
 import {
   Field,
   FieldError,
@@ -58,13 +68,18 @@ import {
 {%- else %}
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 {%- endif %}
+{%- if not tsf %}
 import { Input } from "@/components/ui/input";
+{%- endif %}
+{%- endif %}
+{%- if tsf %}
+import { useAppForm } from "@/hooks/form";
 {%- endif %}
 import { authClient } from "@/lib/auth/client";
 {%- if i18n %}
 import { m } from "@/paraglide/messages";
 {%- endif %}
-{%- if rhf %}
+{%- if validated %}
 
 // Better Auth requires at least 8 characters by default (`emailAndPassword.minPasswordLength`).
 const signInSchema = z.object({
@@ -86,9 +101,11 @@ const signUpSchema = signInSchema.extend({
   name: z.string().trim().min(1, "Enter your name"),
 {%- endif %}
 });
+{%- if rhf %}
 
 type SignInValues = z.infer<typeof signInSchema>;
 type SignUpValues = z.infer<typeof signUpSchema>;
+{%- endif %}
 {%- endif %}
 
 function AuthCard({
@@ -128,7 +145,8 @@ function AuthCard({
     </div>
   );
 }
-{%- if rhf and ui %}
+{%- if tsf %}
+{%- elif rhf and ui %}
 
 function TextField<T extends FieldValues>({
   control,
@@ -228,6 +246,7 @@ function FormError({ message }: { message?: string }) {
     </p>
   );
 }
+{%- if not tsf %}
 
 function SubmitButton({
   isPending,
@@ -256,6 +275,7 @@ function SubmitButton({
 {%- endif %}
   );
 }
+{%- endif %}
 
 export function SignInForm() {
   const navigate = useNavigate();
@@ -277,6 +297,22 @@ export function SignInForm() {
   };
   const error = form.formState.errors.root?.message;
   const isPending = form.formState.isSubmitting;
+{%- elif tsf %}
+  const [error, setError] = useState<string>();
+  const form = useAppForm({
+    defaultValues: { email: "", password: "" },
+    // Validate on submit, then on every change (like React Hook Form).
+    validationLogic: revalidateLogic(),
+    validators: { onDynamic: signInSchema },
+    onSubmit: async ({ value }) => {
+      const { error: authError } = await authClient.signIn.email(value);
+      if (authError) {
+        setError(authError.message ?? {{ expr(i18n, "authError", "Something went wrong. Try again.") }});
+        return;
+      }
+      await navigate({ to: "/" });
+    },
+  });
 {%- else %}
   const [error, setError] = useState<string>();
   const [isPending, setIsPending] = useState(false);
@@ -322,6 +358,15 @@ export function SignInForm() {
         noValidate
         className="grid gap-6"
       >
+{%- elif tsf %}
+      <form
+        onSubmit={async (event) => {
+          event.preventDefault();
+          await form.handleSubmit();
+        }}
+        noValidate
+        className="grid gap-6"
+      >
 {%- else %}
       <form onSubmit={onSubmit} className="grid gap-6">
 {%- endif %}
@@ -330,7 +375,26 @@ export function SignInForm() {
 {%- else %}
         <div className="grid gap-4">
 {%- endif %}
-{%- if rhf and ui %}
+{%- if tsf %}
+          <form.AppField name="email">
+            {(field) => (
+              <field.TextField
+                label{{ attr(i18n, "authEmail", "Email") }}
+                type="email"
+                autoComplete="email"
+              />
+            )}
+          </form.AppField>
+          <form.AppField name="password">
+            {(field) => (
+              <field.TextField
+                label{{ attr(i18n, "authPassword", "Password") }}
+                type="password"
+                autoComplete="current-password"
+              />
+            )}
+          </form.AppField>
+{%- elif rhf and ui %}
           <TextField
             control={form.control}
             name="email"
@@ -381,7 +445,19 @@ export function SignInForm() {
         </div>
 {%- endif %}
         <FormError message={error} />
+{%- if tsf %}
+        <form.AppForm>
+{%- if ui and i18n %}
+          <form.SubmitButton className="w-full">
+            {{ text(i18n, "authSignIn", "Sign in") }}
+          </form.SubmitButton>
+{%- else %}
+          <form.SubmitButton{% if ui %} className="w-full"{% endif %}>{{ text(i18n, "authSignIn", "Sign in") }}</form.SubmitButton>
+{%- endif %}
+        </form.AppForm>
+{%- else %}
         <SubmitButton isPending={isPending}>{{ text(i18n, "authSignIn", "Sign in") }}</SubmitButton>
+{%- endif %}
       </form>
     </AuthCard>
   );
@@ -407,6 +483,22 @@ export function SignUpForm() {
   };
   const error = form.formState.errors.root?.message;
   const isPending = form.formState.isSubmitting;
+{%- elif tsf %}
+  const [error, setError] = useState<string>();
+  const form = useAppForm({
+    defaultValues: { name: "", email: "", password: "" },
+    // Validate on submit, then on every change (like React Hook Form).
+    validationLogic: revalidateLogic(),
+    validators: { onDynamic: signUpSchema },
+    onSubmit: async ({ value }) => {
+      const { error: authError } = await authClient.signUp.email(value);
+      if (authError) {
+        setError(authError.message ?? {{ expr(i18n, "authError", "Something went wrong. Try again.") }});
+        return;
+      }
+      await navigate({ to: "/" });
+    },
+  });
 {%- else %}
   const [error, setError] = useState<string>();
   const [isPending, setIsPending] = useState(false);
@@ -453,6 +545,15 @@ export function SignUpForm() {
         noValidate
         className="grid gap-6"
       >
+{%- elif tsf %}
+      <form
+        onSubmit={async (event) => {
+          event.preventDefault();
+          await form.handleSubmit();
+        }}
+        noValidate
+        className="grid gap-6"
+      >
 {%- else %}
       <form onSubmit={onSubmit} className="grid gap-6">
 {%- endif %}
@@ -461,7 +562,35 @@ export function SignUpForm() {
 {%- else %}
         <div className="grid gap-4">
 {%- endif %}
-{%- if rhf and ui %}
+{%- if tsf %}
+          <form.AppField name="name">
+{%- if i18n %}
+            {(field) => (
+              <field.TextField label={m.authName()} autoComplete="name" />
+            )}
+{%- else %}
+            {(field) => <field.TextField label="Name" autoComplete="name" />}
+{%- endif %}
+          </form.AppField>
+          <form.AppField name="email">
+            {(field) => (
+              <field.TextField
+                label{{ attr(i18n, "authEmail", "Email") }}
+                type="email"
+                autoComplete="email"
+              />
+            )}
+          </form.AppField>
+          <form.AppField name="password">
+            {(field) => (
+              <field.TextField
+                label{{ attr(i18n, "authPassword", "Password") }}
+                type="password"
+                autoComplete="new-password"
+              />
+            )}
+          </form.AppField>
+{%- elif rhf and ui %}
           <TextField
             control={form.control}
             name="name"
@@ -525,7 +654,19 @@ export function SignUpForm() {
         </div>
 {%- endif %}
         <FormError message={error} />
+{%- if tsf %}
+        <form.AppForm>
+{%- if ui and i18n %}
+          <form.SubmitButton className="w-full">
+            {{ text(i18n, "authSignUp", "Sign up") }}
+          </form.SubmitButton>
+{%- else %}
+          <form.SubmitButton{% if ui %} className="w-full"{% endif %}>{{ text(i18n, "authSignUp", "Sign up") }}</form.SubmitButton>
+{%- endif %}
+        </form.AppForm>
+{%- else %}
         <SubmitButton isPending={isPending}>{{ text(i18n, "authSignUp", "Sign up") }}</SubmitButton>
+{%- endif %}
       </form>
     </AuthCard>
   );

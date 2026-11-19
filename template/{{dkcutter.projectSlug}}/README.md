@@ -16,6 +16,8 @@
 {%- endif %}
 {%- if dkcutter.useReactHookForm %}
 - **Form Validation**: Type-safe and performant forms via React Hook Form and Zod.
+{%- elif dkcutter.useTanstackForm %}
+- **Form Validation**: Type-safe forms via TanStack Form and Zod, with reusable fields through `useAppForm` (`src/hooks/form.ts`).
 {%- endif %}
 {%- if dkcutter.useParaglideJs %}
 - **Internationalization**: Fully type-safe i18n via Paraglide JS, with English and Portuguese (`messages/`) and a language switcher in the header.

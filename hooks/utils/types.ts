@@ -3,6 +3,7 @@ import type { PackageManager } from "dkcutter/utils";
 export type { PackageManager };
 export type AuthProvider = "none" | "clerk" | "betterAuth";
 export type Orm = "none" | "prisma" | "drizzle";
+export type FormLibrary = "none" | "reactHookForm" | "tanstackForm";
 export type AutomatedDepsUpdater = "none" | "renovate" | "dependabot";
 export type DeployHost = "none" | "cloudflare" | "netlify" | "nitro" | "vercel";
 
@@ -12,12 +13,14 @@ export interface ContextProps {
   pkgManager: PackageManager;
   authProvider: AuthProvider;
   orm: Orm;
+  formLibrary: FormLibrary;
   useHusky: boolean;
   useLintStaged: boolean;
   useNanoStaged: boolean;
   useCommitlint: boolean;
   useReactCompiler: boolean;
   useReactHookForm: boolean;
+  useTanstackForm: boolean;
   useParaglideJs: boolean;
   useSentry: boolean;
   useEslintWithType: boolean;

@@ -18,7 +18,7 @@
   "authNoAccount": "Não tem uma conta?",
   "authHasAccount": "Já tem uma conta?",
   "authError": "Algo deu errado. Tente novamente.",
-{%- if dkcutter.useReactHookForm %}
+{%- if dkcutter.useReactHookForm or dkcutter.useTanstackForm %}
   "authNameRequired": "Informe seu nome",
   "authEmailInvalid": "Informe um e-mail válido",
   "authPasswordMin": "Use pelo menos 8 caracteres",

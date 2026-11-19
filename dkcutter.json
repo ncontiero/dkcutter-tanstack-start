@@ -58,6 +58,23 @@
     ],
     "promptMessage": "Which {{ colors.blue('ORM') }} would you like to use? (PostgreSQL)"
   },
+  "formLibrary": {
+    "value": "none",
+    "choices": [
+      { "title": "None", "value": "none" },
+      {
+        "title": "React Hook Form",
+        "value": "reactHookForm",
+        "description": "Performant, flexible and extensible forms with easy-to-use validation"
+      },
+      {
+        "title": "TanStack Form",
+        "value": "tanstackForm",
+        "description": "Headless, type-safe form state management with first-class TanStack integration"
+      }
+    ],
+    "promptMessage": "Which {{ colors.blue('Form Library') }} would you like to use?"
+  },
   "additionalTools": {
     "value": "none",
     "choices": [
@@ -85,11 +102,6 @@
         "title": "React Compiler",
         "value": "reactCompiler",
         "description": "Automatically optimize React component renders"
-      },
-      {
-        "title": "React Hook Form",
-        "value": "reactHookForm",
-        "description": "Performant, flexible and extensible forms with easy-to-use validation"
       },
       {
         "title": "Paraglide JS (i18n)",

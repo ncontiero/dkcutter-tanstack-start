@@ -3,6 +3,7 @@ import type {
   AutomatedDepsUpdater,
   ContextProps,
   DeployHost,
+  FormLibrary,
   Orm,
   PackageManager,
 } from "./utils/types";
@@ -24,12 +25,14 @@ const CTX: ContextProps = {
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
   authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
   orm: "{{ dkcutter.orm }}" as Orm,
+  formLibrary: "{{ dkcutter.formLibrary }}" as FormLibrary,
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
   useNanoStaged: toBoolean("{{ dkcutter.useNanoStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
   useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
   useReactHookForm: toBoolean("{{ dkcutter.useReactHookForm }}"),
+  useTanstackForm: toBoolean("{{ dkcutter.useTanstackForm }}"),
   useParaglideJs: toBoolean("{{ dkcutter.useParaglideJs }}"),
   useSentry: toBoolean("{{ dkcutter.useSentry }}"),
   useEslintWithType: toBoolean("{{ dkcutter.useEslintWithType }}"),
@@ -196,6 +199,14 @@ async function main() {
 
   if (!CTX.useReactHookForm) {
     REMOVE_DEPS.push("@hookform/resolvers", "react-hook-form");
+  }
+
+  if (!CTX.useTanstackForm) {
+    REMOVE_DEPS.push("@tanstack/react-form");
+    FILES_TO_REMOVE.push(
+      path.join(srcFolder, "hooks"),
+      path.join(srcFolder, "components", "form.tsx"),
+    );
   }
 
   if (CTX.useParaglideJs) {

@@ -4,7 +4,6 @@
 // {{ dkcutter.add("useNanoStaged", "{{ 'nanoStaged' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useCommitlint", "{{ 'commitlint' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useReactCompiler", "{{ 'reactCompiler' in dkcutter.additionalTools }}") }}
-// {{ dkcutter.add("useReactHookForm", "{{ 'reactHookForm' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useParaglideJs", "{{ 'paraglideJs' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useSentry", "{{ 'sentry' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useEslintWithType", "{{ 'eslintTypeInfo' in dkcutter.additionalTools }}") }}
@@ -18,6 +17,9 @@
 // {{ dkcutter.add("useNetlify", "{{ dkcutter.deployHost == 'netlify' }}") }}
 // Vercel uses Nitro to deploy.
 // {{ dkcutter.add("useNitro", "{{ dkcutter.deployHost in ['nitro', 'vercel'] }}") }}
+
+// {{ dkcutter.add("useReactHookForm", "{{ dkcutter.formLibrary == 'reactHookForm' }}") }}
+// {{ dkcutter.add("useTanstackForm", "{{ dkcutter.formLibrary == 'tanstackForm' }}") }}
 
 // {{ dkcutter.add("usePrisma", "{{ dkcutter.orm == 'prisma' }}") }}
 // {{ dkcutter.add("useDrizzle", "{{ dkcutter.orm == 'drizzle' }}") }}

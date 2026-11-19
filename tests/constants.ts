@@ -39,13 +39,26 @@ export const SUPPORTED_COMBINATIONS = [
   { deployHost: "cloudflare", additionalTools: "sentry,paraglideJs" },
   { deployHost: "vercel", additionalTools: "sentry,paraglideJs" },
   { deployHost: "netlify", additionalTools: "sentry" },
-  { authProvider: "betterAuth", additionalTools: "reactHookForm" },
+  { authProvider: "betterAuth", formLibrary: "reactHookForm" },
+  { formLibrary: "tanstackForm" },
+  { formLibrary: "tanstackForm", additionalTools: "shadcn" },
+  { authProvider: "betterAuth", formLibrary: "tanstackForm" },
+  {
+    authProvider: "betterAuth",
+    formLibrary: "tanstackForm",
+    additionalTools: "shadcn,paraglideJs",
+  },
   { authProvider: "betterAuth", additionalTools: "shadcn" },
-  { authProvider: "betterAuth", additionalTools: "reactHookForm,paraglideJs" },
+  {
+    authProvider: "betterAuth",
+    formLibrary: "reactHookForm",
+    additionalTools: "paraglideJs",
+  },
   {
     authProvider: "betterAuth",
     orm: "prisma",
-    additionalTools: "shadcn,reactHookForm,paraglideJs",
+    formLibrary: "reactHookForm",
+    additionalTools: "shadcn,paraglideJs",
   },
   { authProvider: "clerk", additionalTools: "shadcn" },
   {
@@ -89,6 +102,7 @@ export const SUPPORTED_COMBINATIONS = [
 export const UNSUPPORTED_COMBINATIONS = [
   { authProvider: "non" },
   { orm: "xpto" },
+  { formLibrary: "xpto" },
   { automatedDepsUpdater: "xpto" },
 ];
 
