@@ -2,7 +2,7 @@
   "name": "dkcutter-tanstack-start",
   "type": "module",
   "private": true,
-  "packageManager": "bun@1.4.4",
+  "packageManager": "bun@1.4.5",
   "description": "DKCutter Tanstack Start is a robust template for quickly scaffolding production-ready Tanstack Start applications with modern tooling.",
   "author": "Nicolas Contiero <https://github.com/ncontiero>",
   "license": "MIT",
@@ -25,18 +25,18 @@
     "@inlang/paraglide-js": "3.2.2",
     "@ncontiero/eslint-config": "8.6.2",
     "@tailwindcss/typography": "0.5.20",
-    "@tanstack/eslint-plugin-query": "5.107.1",
+    "@tanstack/eslint-plugin-query": "5.108.4",
     "@tanstack/react-router": "1.170.46",
-    "@types/bun": "1.4.4",
+    "@types/bun": "1.4.5",
     "ansis": "4.5.0",
     "dkcutter": "7.0.2",
     "eslint": "10.15.0",
     "husky": "9.1.7",
-    "lint-staged": "17.6.1",
+    "lint-staged": "17.6.2",
     "react": "19.3.1",
     "tailwindcss": "4.3.5",
     "typescript": "6.0.3",
-    "vitest": "5.1.0"
+    "vitest": "5.1.2"
   },
   "lint-staged": {
     "*": "bun eslint -c eslint.config.js --fix"
